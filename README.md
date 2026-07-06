@@ -5,6 +5,7 @@
 ## Study List
 
 - [네트워크와 클라우드 전체 학습 리스트](list.md)
+- [현재 정리 상태와 다음 학습 순서](progress.md)
 
 ## Logs
 
