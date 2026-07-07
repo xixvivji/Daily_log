@@ -12,7 +12,7 @@
 <!-- LOG_INDEX_START -->
 - [2026-07-07 Nginx, Docker 네트워크, AWS 배포 인프라 학습 정리](logs/2026-07-07-nginx-docker-aws-infra.md)
 - [2026-07-07 배포 전략: Rolling, Blue/Green, Canary, Feature Flag](logs/2026-07-07-deployment-strategies.md)
-- [2026-07-06 다음 학습 내용 정리](logs/2026-07-06-next-study-topics.md)
+- [2026-07-06 Nginx, Docker, AWS 인프라 학습 로드맵](logs/2026-07-06-nginx-docker-aws-infra-roadmap.md)
 - [2026-07-04 프록시와 라우팅 심화 개념 정리](logs/2026-07-04-proxy-routing-study-plan.md)
 - [2026-07-03 프록시와 라우팅: Forward Proxy, Reverse Proxy, Ingress](logs/2026-07-03-proxy-routing.md)
 - [2026-07-03 네트워크 기초 1: 네트워크의 전체 구조](logs/2026-07-03-network-basics-01.md)
