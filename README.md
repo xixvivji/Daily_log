@@ -18,6 +18,7 @@
 ### Infrastructure
 
 - [2026-07-07 Nginx, Docker 네트워크, AWS 배포 인프라 학습 정리](infrastructure/2026-07-07-nginx-docker-aws-infra.md)
+- [2026-07-07 인프라 다음 학습 계획: Nginx, Docker, AWS, 운영 자동화](infrastructure/2026-07-07-infra-next-learning-plan.md)
 - [2026-07-07 배포 전략: Rolling, Blue/Green, Canary, Feature Flag](infrastructure/2026-07-07-deployment-strategies.md)
 - [2026-07-06 Nginx, Docker, AWS 인프라 학습 로드맵](infrastructure/2026-07-06-nginx-docker-aws-infra-roadmap.md)
 - [2026-07-04 프록시와 라우팅 심화 개념 정리](infrastructure/2026-07-04-proxy-routing-study-plan.md)
