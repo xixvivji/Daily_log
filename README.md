@@ -5,7 +5,7 @@
 ## Study List
 
 - [네트워크와 클라우드 전체 학습 리스트](list.md)
-- [현재 정리 상태와 다음 학습 순서](progress.md)
+- [현재 정리 상태와 보강 필요 내용](progress.md)
 
 ## Study Areas
 
@@ -20,8 +20,8 @@
 - [2026-07-07 Nginx, Docker, AWS 운영 인프라 학습 내용](infrastructure/2026-07-07-nginx-docker-aws-operations.md)
 - [2026-07-07 Nginx, Docker 네트워크, AWS 배포 인프라 학습 정리](infrastructure/2026-07-07-nginx-docker-aws-infra.md)
 - [2026-07-07 배포 전략: Rolling, Blue/Green, Canary, Feature Flag](infrastructure/2026-07-07-deployment-strategies.md)
-- [2026-07-06 Nginx, Docker, AWS 인프라 학습 로드맵](infrastructure/2026-07-06-nginx-docker-aws-infra-roadmap.md)
-- [2026-07-04 프록시와 라우팅 심화 개념 정리](infrastructure/2026-07-04-proxy-routing-study-plan.md)
+- [2026-07-06 Nginx, Docker, AWS 인프라 기반 개념 정리](infrastructure/2026-07-06-nginx-docker-aws-infra-foundations.md)
+- [2026-07-04 프록시와 라우팅 심화 개념 정리](infrastructure/2026-07-04-nginx-proxy-routing-troubleshooting.md)
 - [2026-07-03 프록시와 라우팅: Forward Proxy, Reverse Proxy, Ingress](infrastructure/2026-07-03-proxy-routing.md)
 - [2026-07-03 네트워크 기초 1: 네트워크의 전체 구조](infrastructure/2026-07-03-network-basics-01.md)
 

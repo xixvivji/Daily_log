@@ -1,6 +1,6 @@
 # 2026-07-03 프록시와 라우팅: Forward Proxy, Reverse Proxy, Ingress
 
-## 오늘의 목표
+## 핵심 질문
 
 프록시와 라우팅 개념을 정확히 구분한다.
 
