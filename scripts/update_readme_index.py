@@ -3,9 +3,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
-LOGS_DIR = ROOT / "logs"
-START = "<!-- LOG_INDEX_START -->"
-END = "<!-- LOG_INDEX_END -->"
+START = "<!-- NOTE_INDEX_START -->"
+END = "<!-- NOTE_INDEX_END -->"
+SECTIONS = [
+    ("Infrastructure", ROOT / "infrastructure"),
+    ("Backend", ROOT / "backend"),
+]
 
 
 def title_for(path: Path) -> str:
@@ -15,15 +18,31 @@ def title_for(path: Path) -> str:
     return path.stem
 
 
-def build_index() -> str:
-    logs = sorted(LOGS_DIR.glob("*.md"), reverse=True)
-    if not logs:
-        return "- 아직 작성된 로그가 없습니다."
-
+def build_section(title: str, directory: Path) -> list[str]:
     lines = []
-    for log in logs:
+    notes = [
+        path for path in sorted(directory.glob("*.md"), reverse=True)
+        if path.name.lower() != "readme.md"
+    ]
+    lines.append(f"### {title}")
+    if not notes:
+        lines.append("")
+        lines.append("- 아직 작성된 노트가 없습니다.")
+        return lines
+
+    lines.append("")
+    for log in notes:
         rel = log.relative_to(ROOT).as_posix()
         lines.append(f"- [{title_for(log)}]({rel})")
+    return lines
+
+
+def build_index() -> str:
+    lines = []
+    for title, directory in SECTIONS:
+        if lines:
+            lines.append("")
+        lines.extend(build_section(title, directory))
     return "\n".join(lines)
 
 
