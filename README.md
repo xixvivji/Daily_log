@@ -17,6 +17,7 @@
 <!-- NOTE_INDEX_START -->
 ### Infrastructure
 
+- [2026-07-08 네트워크 프로토콜 심화: TCP, DNS, HTTP, TLS](infrastructure/2026-07-08-network-protocol-deep-dive.md)
 - [2026-07-07 Nginx, Docker, AWS 운영 인프라 학습 내용](infrastructure/2026-07-07-nginx-docker-aws-operations.md)
 - [2026-07-07 Nginx, Docker 네트워크, AWS 배포 인프라 학습 정리](infrastructure/2026-07-07-nginx-docker-aws-infra.md)
 - [2026-07-07 배포 전략: Rolling, Blue/Green, Canary, Feature Flag](infrastructure/2026-07-07-deployment-strategies.md)

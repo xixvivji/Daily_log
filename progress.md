@@ -6,7 +6,7 @@
 
 `list.md`는 네트워크 기본부터 클라우드 운영까지 전체 공부 범위를 잡아둔 파일이고, `infrastructure/` 아래 파일들은 실제로 자세히 정리한 인프라 학습 노트다.
 
-현재 작성된 인프라 상세 노트는 다음 7개다.
+현재 작성된 인프라 상세 노트는 다음 8개다.
 
 ```text
 infrastructure/2026-07-03-network-basics-01.md
@@ -16,6 +16,7 @@ infrastructure/2026-07-06-nginx-docker-aws-infra-foundations.md
 infrastructure/2026-07-07-nginx-docker-aws-infra.md
 infrastructure/2026-07-07-deployment-strategies.md
 infrastructure/2026-07-07-nginx-docker-aws-operations.md
+infrastructure/2026-07-08-network-protocol-deep-dive.md
 ```
 
 ## 현재 자세히 정리된 부분
@@ -50,7 +51,7 @@ HTTP 요청이 계층을 지나며 포장되는 흐름
 
 ```text
 기본 개념 정리 완료
-세부 주제인 주소 체계, TCP, DNS, HTTP는 별도 심화 정리 필요
+CIDR, TCP, DNS, HTTP, TLS는 네트워크 프로토콜 심화 문서에서 보강됨
 ```
 
 ## 2. 프록시 기본
@@ -314,25 +315,64 @@ rollback 전략
 Kubernetes Deployment, Argo Rollouts, ALB weighted target group 같은 도구 기반 예시는 별도 실습 문서로 분리 가능
 ```
 
+## 11. 네트워크 프로토콜 심화
+
+관련 파일:
+
+```text
+infrastructure/2026-07-08-network-protocol-deep-dive.md
+```
+
+정리된 내용:
+
+```text
+IP 주소와 CIDR
+/16과 /24 차이
+VPC와 Subnet 대역
+IP 대역이 겹치면 생기는 문제
+TCP 3-way handshake
+connection refused
+connection timed out
+no route to host
+TCP 종료와 TIME_WAIT
+DNS 조회 흐름
+recursive resolver
+root DNS / TLD DNS / authoritative DNS
+A Record / CNAME / Route 53 Alias
+TTL과 DNS 캐시
+HTTP 요청과 응답 구조
+HTTP Host 헤더
+주요 HTTP status code
+HTTPS와 TLS handshake
+인증서 검증
+TLS termination
+Timeout 종류
+keep-alive
+DNS → TCP → TLS → HTTP → Nginx → Docker → Application 장애 구분 순서
+```
+
+상태:
+
+```text
+운영 장애 분석에 필요한 TCP, DNS, HTTP, TLS 기본 심화 정리 완료
+TCP congestion control, HTTP/2, HTTP/3, DNSSEC은 별도 심화 주제로 분리 가능
+```
+
 ## 아직 보강하면 좋은 부분
 
-현재 문서들은 네트워크 큰그림, 프록시, Nginx, Docker, AWS 운영 구조, 배포 전략까지는 꽤 자세히 정리되어 있다.
+현재 문서들은 네트워크 큰그림, 프록시, Nginx, Docker, AWS 운영 구조, 배포 전략, TCP/DNS/HTTP/TLS 심화까지는 꽤 자세히 정리되어 있다.
 
 남은 보강 포인트는 이미 작성한 내용의 빈 곳이라기보다, 별도 심화 주제로 빼는 것이 좋은 내용들이다.
 
 ### 네트워크 심화
 
 ```text
-CIDR 계산
-Subnet mask
-default gateway
 ARP
-TCP 3-way handshake / 4-way handshake
 TCP congestion control
 UDP 사용 사례
-DNS recursive query / iterative query
 HTTP cache
 HTTP/2와 HTTP/3
+DNSSEC
 ```
 
 ### 운영 장애 분석 심화
@@ -383,5 +423,5 @@ Terraform 기초
 
 ```text
 네트워크 큰그림, 프록시/라우팅, Nginx, Docker 네트워크, AWS 운영 인프라, 배포 전략까지는 상세 노트가 작성되어 있다.
-남은 부분은 TCP/DNS/HTTP 심화, Kubernetes 내부 네트워크, AWS IAM/Storage/Database/IaC 같은 확장 주제다.
+TCP/DNS/HTTP/TLS 심화도 추가되었고, 남은 부분은 Kubernetes 내부 네트워크, AWS IAM/Storage/Database/IaC 같은 확장 주제다.
 ```
