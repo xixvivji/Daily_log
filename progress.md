@@ -6,7 +6,7 @@
 
 `list.md`는 네트워크 기본부터 클라우드 운영까지 전체 공부 범위를 잡아둔 파일이고, `infrastructure/` 아래 파일들은 실제로 자세히 정리한 인프라 학습 노트다.
 
-현재 작성된 인프라 상세 노트는 다음 8개다.
+현재 작성된 인프라 상세 노트는 다음 9개다.
 
 ```text
 infrastructure/2026-07-03-network-basics-01.md
@@ -16,6 +16,7 @@ infrastructure/2026-07-06-nginx-docker-aws-infra-foundations.md
 infrastructure/2026-07-07-nginx-docker-aws-infra.md
 infrastructure/2026-07-07-deployment-strategies.md
 infrastructure/2026-07-07-nginx-docker-aws-operations.md
+infrastructure/2026-07-08-ip-subnet-mask-cidr.md
 infrastructure/2026-07-08-network-protocol-deep-dive.md
 ```
 
@@ -51,7 +52,8 @@ HTTP 요청이 계층을 지나며 포장되는 흐름
 
 ```text
 기본 개념 정리 완료
-CIDR, TCP, DNS, HTTP, TLS는 네트워크 프로토콜 심화 문서에서 보강됨
+IP 주소, 서브넷 마스크, CIDR은 별도 상세 문서에서 보강됨
+TCP, DNS, HTTP, TLS는 네트워크 프로토콜 심화 문서에서 보강됨
 ```
 
 ## 2. 프록시 기본
@@ -315,7 +317,47 @@ rollback 전략
 Kubernetes Deployment, Argo Rollouts, ALB weighted target group 같은 도구 기반 예시는 별도 실습 문서로 분리 가능
 ```
 
-## 11. 네트워크 프로토콜 심화
+## 11. IP 주소와 서브넷 마스크 상세
+
+관련 파일:
+
+```text
+infrastructure/2026-07-08-ip-subnet-mask-cidr.md
+```
+
+정리된 내용:
+
+```text
+IPv4 주소가 32비트인 이유
+8비트와 0~255 범위
+10진수와 2진수 변환
+IP 주소의 네트워크 부분과 호스트 부분
+서브넷 마스크의 의미
+255.255.255.0이 /24가 되는 이유
+/24에서 앞 24비트가 네트워크가 되는 과정
+네트워크 주소 계산 방법
+브로드캐스트 주소 계산 방법
+/24에서 사용 가능한 IP가 1~254인 이유
+같은 네트워크와 다른 네트워크 판단
+/16, /24, /25 차이
+CIDR 숫자와 주소 개수 계산
+게이트웨이가 필요한 이유
+게이트웨이가 같은 네트워크 안에 있어야 하는 이유
+0.0.0.0/0
+127.0.0.1/32
+사설 IP 대역
+AWS VPC와 Subnet 예시
+IP 대역이 겹치면 생기는 문제
+```
+
+상태:
+
+```text
+IP 주소, 서브넷 마스크, CIDR 계산 기초 정리 완료
+/25, /26 같은 세부 subnet 분할도 입문 수준에서 정리됨
+```
+
+## 12. 네트워크 프로토콜 심화
 
 관련 파일:
 
