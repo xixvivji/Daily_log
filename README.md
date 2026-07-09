@@ -17,6 +17,7 @@
 <!-- NOTE_INDEX_START -->
 ### Infrastructure
 
+- [2026-07-09 남은 네트워크 심화: Routing, NAT, DNS, TCP, HTTP, TLS, Firewall](infrastructure/2026-07-09-network-remaining-deep-dive.md)
 - [2026-07-08 네트워크 프로토콜 심화: TCP, DNS, HTTP, TLS](infrastructure/2026-07-08-network-protocol-deep-dive.md)
 - [2026-07-08 IP 주소와 서브넷 마스크: CIDR, 네트워크 범위, 게이트웨이](infrastructure/2026-07-08-ip-subnet-mask-cidr.md)
 - [2026-07-07 Nginx, Docker, AWS 운영 인프라 학습 내용](infrastructure/2026-07-07-nginx-docker-aws-operations.md)

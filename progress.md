@@ -6,7 +6,7 @@
 
 `list.md`는 네트워크 기본부터 클라우드 운영까지 전체 공부 범위를 잡아둔 파일이고, `infrastructure/` 아래 파일들은 실제로 자세히 정리한 인프라 학습 노트다.
 
-현재 작성된 인프라 상세 노트는 다음 9개다.
+현재 작성된 인프라 상세 노트는 다음 10개다.
 
 ```text
 infrastructure/2026-07-03-network-basics-01.md
@@ -18,6 +18,7 @@ infrastructure/2026-07-07-deployment-strategies.md
 infrastructure/2026-07-07-nginx-docker-aws-operations.md
 infrastructure/2026-07-08-ip-subnet-mask-cidr.md
 infrastructure/2026-07-08-network-protocol-deep-dive.md
+infrastructure/2026-07-09-network-remaining-deep-dive.md
 ```
 
 ## 현재 자세히 정리된 부분
@@ -400,21 +401,88 @@ DNS → TCP → TLS → HTTP → Nginx → Docker → Application 장애 구분 
 TCP congestion control, HTTP/2, HTTP/3, DNSSEC은 별도 심화 주제로 분리 가능
 ```
 
+## 13. 남은 네트워크 심화
+
+관련 파일:
+
+```text
+infrastructure/2026-07-09-network-remaining-deep-dive.md
+```
+
+정리된 내용:
+
+```text
+Routing Table
+Default Route
+Longest Prefix Match
+AWS Route Table
+Public Subnet과 Private Subnet 차이
+Internet Gateway
+NAT와 NAT Gateway
+ARP
+DNS recursive query와 iterative query
+TTL과 DNS 캐시
+TCP 3-way handshake / 4-way handshake
+TIME_WAIT
+connection refused와 connection timed out
+UDP
+HTTP 요청/응답 구조
+HTTP Cache
+HTTP/1.1, HTTP/2, HTTP/3 차이
+HTTPS / TLS handshake
+인증서 검증
+SNI
+TLS Termination
+X-Forwarded-Proto
+Firewall
+Security Group
+NACL
+운영 장애 분석 순서
+```
+
+상태:
+
+```text
+남은 네트워크 핵심 심화 주제 정리 완료
+추가로 더 깊게 볼 내용은 TCP congestion control, DNSSEC, HTTP/3 내부 동작, 실제 패킷 캡처 분석 정도로 축소됨
+```
+
 ## 아직 보강하면 좋은 부분
 
-현재 문서들은 네트워크 큰그림, 프록시, Nginx, Docker, AWS 운영 구조, 배포 전략, TCP/DNS/HTTP/TLS 심화까지는 꽤 자세히 정리되어 있다.
+현재 문서들은 네트워크 큰그림, 프록시, Nginx, Docker, AWS 운영 구조, 배포 전략, IP/CIDR, 라우팅, NAT, DNS, TCP, UDP, HTTP, TLS, 방화벽, 장애 분석까지는 꽤 자세히 정리되어 있다.
 
 남은 보강 포인트는 이미 작성한 내용의 빈 곳이라기보다, 별도 심화 주제로 빼는 것이 좋은 내용들이다.
 
 ### 네트워크 심화
 
 ```text
-ARP
 TCP congestion control
-UDP 사용 사례
-HTTP cache
-HTTP/2와 HTTP/3
+TCP slow start
+TCP retransmission
+packet capture with tcpdump
+Wireshark 분석
 DNSSEC
+HTTP/3 내부 동작
+QUIC
+MTU / MSS
+ICMP
+traceroute 동작 원리
+VPN
+VPC Peering
+Transit Gateway
+PrivateLink
+CloudFront / CDN
+WAF
+Load Balancer 고급 알고리즘
+Connection Draining
+Sticky Session
+Proxy Protocol
+gRPC와 HTTP/2
+WebSocket
+API Gateway 심화
+Service Mesh 네트워크
+Kubernetes CNI
+NetworkPolicy
 ```
 
 ### 운영 장애 분석 심화
@@ -464,6 +532,6 @@ Terraform 기초
 ## 현재 상태 한 줄 정리
 
 ```text
-네트워크 큰그림, 프록시/라우팅, Nginx, Docker 네트워크, AWS 운영 인프라, 배포 전략까지는 상세 노트가 작성되어 있다.
-TCP/DNS/HTTP/TLS 심화도 추가되었고, 남은 부분은 Kubernetes 내부 네트워크, AWS IAM/Storage/Database/IaC 같은 확장 주제다.
+네트워크 큰그림, IP/CIDR, 라우팅, NAT, DNS, TCP, UDP, HTTP, TLS, 방화벽, 프록시, Nginx, Docker 네트워크, AWS 운영 인프라, 배포 전략까지는 상세 노트가 작성되어 있다.
+남은 부분은 패킷 캡처, TCP congestion control, HTTP/3 내부 동작, Kubernetes 내부 네트워크, AWS IAM/Storage/Database/IaC 같은 확장 주제다.
 ```
