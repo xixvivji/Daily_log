@@ -6,7 +6,7 @@
 
 `list.md`는 네트워크 기본부터 클라우드 운영까지 전체 공부 범위를 잡아둔 파일이고, `infrastructure/` 아래 파일들은 실제로 자세히 정리한 인프라 학습 노트다.
 
-현재 작성된 인프라 상세 노트는 다음 10개다.
+현재 작성된 인프라 상세 노트는 다음 15개다.
 
 ```text
 infrastructure/2026-07-03-network-basics-01.md
@@ -19,6 +19,11 @@ infrastructure/2026-07-07-nginx-docker-aws-operations.md
 infrastructure/2026-07-08-ip-subnet-mask-cidr.md
 infrastructure/2026-07-08-network-protocol-deep-dive.md
 infrastructure/2026-07-09-network-remaining-deep-dive.md
+infrastructure/2026-07-10-tcp-deep-dive.md
+infrastructure/2026-07-10-dns-deep-dive.md
+infrastructure/2026-07-10-http-https-deep-dive.md
+infrastructure/2026-07-10-aws-network-deep-dive.md
+infrastructure/2026-07-10-network-troubleshooting-practice.md
 ```
 
 ## 현재 자세히 정리된 부분
@@ -447,42 +452,112 @@ NACL
 추가로 더 깊게 볼 내용은 TCP congestion control, DNSSEC, HTTP/3 내부 동작, 실제 패킷 캡처 분석 정도로 축소됨
 ```
 
-## 아직 보강하면 좋은 부분
+## 14. 네트워크 마무리 심화 5개
 
-현재 문서들은 네트워크 큰그림, 프록시, Nginx, Docker, AWS 운영 구조, 배포 전략, IP/CIDR, 라우팅, NAT, DNS, TCP, UDP, HTTP, TLS, 방화벽, 장애 분석까지는 꽤 자세히 정리되어 있다.
-
-남은 보강 포인트는 이미 작성한 내용의 빈 곳이라기보다, 별도 심화 주제로 빼는 것이 좋은 내용들이다.
-
-### 네트워크 심화
+관련 파일:
 
 ```text
-TCP congestion control
-TCP slow start
-TCP retransmission
-packet capture with tcpdump
-Wireshark 분석
-DNSSEC
-HTTP/3 내부 동작
-QUIC
-MTU / MSS
-ICMP
-traceroute 동작 원리
+infrastructure/2026-07-10-tcp-deep-dive.md
+infrastructure/2026-07-10-dns-deep-dive.md
+infrastructure/2026-07-10-http-https-deep-dive.md
+infrastructure/2026-07-10-aws-network-deep-dive.md
+infrastructure/2026-07-10-network-troubleshooting-practice.md
+```
+
+정리된 내용:
+
+```text
+TCP 연결과 종료
+TCP 상태
+TIME_WAIT / CLOSE_WAIT
+connection refused / connection timed out / read timeout
+keep-alive
+flow control
+congestion control
+retransmission
+DNS resolver
+authoritative DNS
+DNS record type
+Route 53 Alias
+TTL과 DNS propagation
+DNS 장애 유형
+HTTP 요청/응답 구조
+HTTP method와 status code
+Cookie
+CORS
+HTTP cache
+HTTP/1.1, HTTP/2, HTTP/3
+HTTPS / TLS
+SNI
+X-Forwarded headers
+AWS VPC / Subnet / Route Table
+Internet Gateway / NAT Gateway
+Security Group / NACL
+ALB / Target Group / Health Check
+Route 53 / ACM
+VPC Endpoint
+DNS부터 Application까지 장애 분석 순서
+```
+
+상태:
+
+```text
+백엔드와 인프라 운영 기준 네트워크 마무리 정리 완료
+Kubernetes 네트워크, WAF/CDN, VPC Peering, Transit Gateway, PrivateLink 같은 확장 주제는 클라우드 학습에서 이어서 정리
+```
+
+## 네트워크 이후 보강하면 좋은 부분
+
+현재 문서들은 네트워크 큰그림, 프록시, Nginx, Docker, AWS 운영 구조, 배포 전략, IP/CIDR, 라우팅, NAT, DNS, TCP, UDP, HTTP, TLS, 방화벽, 장애 분석까지는 백엔드/인프라 기준으로 충분히 정리되어 있다.
+
+남은 보강 포인트는 네트워크 부족분이라기보다 클라우드, Kubernetes, 보안, 운영 자동화로 넘어가면서 별도 주제로 빼는 것이 좋다.
+
+### 클라우드 네트워크 확장
+
+```text
 VPN
 VPC Peering
 Transit Gateway
 PrivateLink
 CloudFront / CDN
 WAF
+Route 53 고급 라우팅 정책
+Global Accelerator
+Direct Connect
+```
+
+### Kubernetes 네트워크 확장
+
+```text
+Kubernetes CNI
+Pod network
+Service network
+kube-proxy
+CoreDNS
+NetworkPolicy
+Ingress Controller 고급 설정
+Service Mesh 네트워크
+```
+
+### 네트워크 고급 이론
+
+```text
+packet capture with tcpdump
+Wireshark 분석
+TCP slow start
+TCP retransmission
+MTU / MSS
+ICMP
+traceroute 동작 원리
+DNSSEC
+HTTP/3 내부 동작
+QUIC
 Load Balancer 고급 알고리즘
 Connection Draining
 Sticky Session
 Proxy Protocol
 gRPC와 HTTP/2
 WebSocket
-API Gateway 심화
-Service Mesh 네트워크
-Kubernetes CNI
-NetworkPolicy
 ```
 
 ### 운영 장애 분석 심화
@@ -532,6 +607,6 @@ Terraform 기초
 ## 현재 상태 한 줄 정리
 
 ```text
-네트워크 큰그림, IP/CIDR, 라우팅, NAT, DNS, TCP, UDP, HTTP, TLS, 방화벽, 프록시, Nginx, Docker 네트워크, AWS 운영 인프라, 배포 전략까지는 상세 노트가 작성되어 있다.
-남은 부분은 패킷 캡처, TCP congestion control, HTTP/3 내부 동작, Kubernetes 내부 네트워크, AWS IAM/Storage/Database/IaC 같은 확장 주제다.
+네트워크 큰그림, IP/CIDR, 라우팅, NAT, DNS, TCP, UDP, HTTP, TLS, 방화벽, 프록시, Nginx, Docker 네트워크, AWS 네트워크, 장애 분석까지 상세 노트가 작성되어 있다.
+이제 네트워크는 마무리하고, 다음 흐름은 백엔드 정리로 넘어가면 된다.
 ```
