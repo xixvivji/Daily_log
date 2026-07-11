@@ -52,4 +52,12 @@
 - [14. 백엔드 운영: Logging, Monitoring, Cache, MQ, Batch](backend/14-backend-operation.md)
 - [15. 백엔드 아키텍처: Layered, DDD, Clean Architecture](backend/15-backend-architecture.md)
 - [16. Spring Data JPA 회원 CRUD 실전 구조](backend/16-spring-jpa-member-crud.md)
+- [17. SQL과 Index 실행 계획 심화](backend/17-sql-index-execution-plan.md)
+- [18. Spring Security 로그인 실전](backend/18-spring-security-auth-implementation.md)
+- [19. 주문·재고 동시성 실전](backend/19-order-stock-concurrency.md)
+- [20. Redis와 Cache 실전](backend/20-redis-cache.md)
+- [21. Kafka·RabbitMQ와 Transactional Outbox](backend/21-messaging-outbox.md)
+- [22. 외부 API 연동과 장애 격리](backend/22-external-api-resilience.md)
+- [23. Spring Batch 실전](backend/23-spring-batch.md)
+- [24. 성능 Test와 JVM·DB Tuning](backend/24-performance-testing-tuning.md)
 <!-- NOTE_INDEX_END -->

@@ -21,4 +21,12 @@
 14. 백엔드 운영
 15. 백엔드 아키텍처
 16. Spring Data JPA 회원 CRUD 실전 구조
+17. SQL과 Index 실행 계획 심화
+18. Spring Security 로그인 실전
+19. 주문·재고 동시성 실전
+20. Redis와 Cache 실전
+21. Kafka·RabbitMQ와 Transactional Outbox
+22. 외부 API 연동과 장애 격리
+23. Spring Batch 실전
+24. 성능 Test와 JVM·DB Tuning
 ```
