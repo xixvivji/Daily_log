@@ -127,6 +127,62 @@ count.incrementAndGet();
 
 단순 counter에는 유용하지만 복잡한 비즈니스 트랜잭션을 모두 해결하지는 못한다.
 
+## Java Memory Model
+
+여러 thread가 같은 메모리를 사용할 때는 세 가지를 구분해야 한다.
+
+```text
+원자성
+→ 연산이 중간에 나뉘지 않고 한 단위로 수행되는가?
+
+가시성
+→ 한 thread의 변경을 다른 thread가 언제 볼 수 있는가?
+
+순서성
+→ compiler와 CPU의 재배치가 있어도 필요한 실행 순서가 보장되는가?
+```
+
+`count++`는 읽기, 증가, 쓰기로 나뉘므로 원자적이지 않다. 한 thread가 값을 변경했다고 다른 thread가 즉시 최신 값을 본다는 보장도 synchronization 없이는 부족할 수 있다.
+
+## volatile
+
+`volatile`은 해당 변수의 읽기와 쓰기에 가시성과 특정 순서 보장을 제공한다.
+
+```java
+private volatile boolean running = true;
+```
+
+하지만 복합 연산을 원자적으로 만들지는 않는다.
+
+```java
+volatile int count;
+count++; // 여전히 원자적이지 않음
+```
+
+단순 상태 플래그에는 유용하지만 여러 값을 함께 변경하거나 읽기-수정-쓰기가 필요하면 lock이나 atomic 연산이 필요하다.
+
+## Lock과 Deadlock
+
+`ReentrantLock`은 명시적인 lock 획득·해제, 시간 제한, interrupt 가능한 대기 같은 기능을 제공한다.
+
+```java
+lock.lock();
+try {
+    update();
+} finally {
+    lock.unlock();
+}
+```
+
+Deadlock은 서로가 가진 lock을 기다리며 영원히 진행하지 못하는 상태다.
+
+```text
+Thread A: lock 1 획득 → lock 2 대기
+Thread B: lock 2 획득 → lock 1 대기
+```
+
+lock 획득 순서를 통일하고, lock 범위를 줄이며, 여러 lock을 동시에 잡는 구조를 피하는 것이 기본 대응이다.
+
 ## Thread Pool
 
 Thread를 요청마다 계속 새로 만들면 비용이 크다.
@@ -143,6 +199,67 @@ Thread Pool은 미리 thread를 만들어두고 재사용한다.
 Tomcat도 thread pool을 사용한다.
 
 thread pool이 고갈되면 요청이 대기하거나 timeout이 발생할 수 있다.
+
+`ExecutorService`는 작업 제출과 thread 관리를 분리한다.
+
+```java
+ExecutorService executor = Executors.newFixedThreadPool(10);
+Future<Member> future = executor.submit(() -> memberClient.find(id));
+```
+
+pool 크기는 CPU 작업과 blocking I/O 작업에서 기준이 다르다. queue가 무제한이면 요청이 메모리에 계속 쌓이고, 너무 작으면 처리량이 낮으며, 너무 크면 context switching과 하위 시스템 과부하가 커진다. pool 크기뿐 아니라 queue 크기, 거부 정책, timeout, metric을 함께 설정해야 한다.
+
+## CompletableFuture
+
+`CompletableFuture`는 비동기 결과를 조합할 수 있다.
+
+```java
+CompletableFuture<Member> memberFuture =
+    CompletableFuture.supplyAsync(() -> memberClient.find(id), executor);
+
+CompletableFuture<List<Order>> orderFuture =
+    CompletableFuture.supplyAsync(() -> orderClient.findByMember(id), executor);
+
+MemberSummary summary = memberFuture
+    .thenCombine(orderFuture, MemberSummary::new)
+    .orTimeout(2, TimeUnit.SECONDS)
+    .join();
+```
+
+서로 독립적인 I/O를 병렬화할 때 유용하지만, executor를 지정하지 않은 async 메서드는 공용 pool을 사용할 수 있다. timeout, 예외 처리, 취소, thread pool 격리를 설계하지 않으면 장애가 전파될 수 있다.
+
+## Virtual Thread
+
+Virtual Thread는 JVM이 관리하는 가벼운 thread다. blocking I/O가 많은 thread-per-request 코드의 처리량을 높이는 데 유용하다.
+
+```java
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    Future<Member> result = executor.submit(() -> memberClient.find(id));
+}
+```
+
+Virtual Thread는 작업 자체를 더 빠르게 실행하거나 DB connection 수를 늘려주지 않는다. DB pool이 30개라면 수천 개 virtual thread가 있어도 동시에 수행 가능한 DB 작업은 connection 수에 제한된다. CPU 집약 작업의 속도를 높이기 위한 기능도 아니다.
+
+## 애플리케이션 락과 DB 락
+
+```text
+synchronized / ReentrantLock
+→ 같은 JVM process 내부 thread 사이에서만 유효
+
+DB pessimistic lock
+→ transaction이 row lock을 선점
+
+DB optimistic lock
+→ version을 비교해 충돌을 감지
+
+분산 lock
+→ 여러 application instance 사이에서 하나의 자원 접근 조정
+
+Unique constraint
+→ 최종 데이터 중복을 DB가 거부
+```
+
+서버가 여러 대라면 JVM lock만으로 중복 주문이나 쿠폰 사용을 막을 수 없다. 가능한 경우 DB 제약조건을 최종 방어선으로 두고, 충돌 빈도와 처리량에 따라 optimistic lock, pessimistic lock, queue, distributed lock을 선택한다.
 
 ## Blocking I/O
 

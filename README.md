@@ -50,4 +50,5 @@
 - [13. 테스트](backend/13-testing.md)
 - [14. 백엔드 운영: Logging, Monitoring, Cache, MQ, Batch](backend/14-backend-operation.md)
 - [15. 백엔드 아키텍처: Layered, DDD, Clean Architecture](backend/15-backend-architecture.md)
+- [16. Spring Data JPA 회원 CRUD 실전 구조](backend/16-spring-jpa-member-crud.md)
 <!-- NOTE_INDEX_END -->

@@ -193,6 +193,155 @@ coupon
 
 서비스가 커질수록 도메인 중심 패키지가 변경 범위를 파악하기 쉬울 수 있다.
 
+## Layer 사이의 의존 방향
+
+단순 Layered Architecture에서도 각 계층이 아무 방향으로 참조하면 책임 분리가 무너진다.
+
+```text
+Web → Application → Domain
+Infrastructure → Application/Domain이 정의한 port
+```
+
+Controller는 HTTP DTO를 application command로 변환하고 use case를 호출한다. Application Service는 흐름과 transaction을 조율한다. Domain은 핵심 규칙을 실행한다. Infrastructure는 JPA, Redis, 외부 API 구현을 제공한다.
+
+작은 CRUD에서는 Entity와 JPA model을 하나로 사용해도 현실적이다. 규칙이 복잡해져 persistence 요구사항이 domain model을 왜곡하기 시작하면 분리를 검토한다.
+
+## Package by Layer와 Package by Feature
+
+계층 중심:
+
+```text
+controller/
+service/
+repository/
+dto/
+```
+
+기능 중심:
+
+```text
+member/
+  controller/
+  service/
+  repository/
+  domain/
+order/
+payment/
+```
+
+기능 중심 구조는 한 기능 변경에 관련된 파일을 가까이 두고 다른 기능의 내부 구현을 숨기기 쉽다. 프로젝트가 커질수록 기능별 최상위 package와 그 내부의 필요한 계층을 조합하는 방식이 관리하기 편하다.
+
+## Application Service와 Domain Service
+
+```text
+Application Service
+→ use case 순서 조율
+→ repository와 외부 port 호출
+→ transaction 경계
+
+Domain Service
+→ 특정 Entity 하나에 자연스럽게 속하지 않는 핵심 도메인 규칙
+→ 가능하면 기술 의존성 없음
+```
+
+모든 로직을 `MemberService`, `OrderService`에 넣으면 Service가 거대해진다. 반대로 단순한 field 변경까지 무조건 Domain Service로 분리하면 모델이 잘게 찢어진다.
+
+## Aggregate와 일관성 경계
+
+Aggregate는 한 transaction에서 일관성을 지켜야 하는 객체 묶음이고 Aggregate Root가 외부 접근 지점이다.
+
+```text
+Order Aggregate
+→ Order root
+→ OrderLine children
+```
+
+외부 객체는 `OrderLine`을 직접 저장하거나 수정하기보다 `Order`의 method를 통해 변경한다. 다른 Aggregate는 객체 참조 대신 ID로 연결하면 한 Aggregate를 로딩할 때 거대한 객체 graph가 따라오는 것을 줄일 수 있다.
+
+Aggregate를 너무 크게 잡으면 lock 범위와 transaction 비용이 커지고, 너무 작게 잡으면 지켜야 할 규칙이 여러 transaction에 흩어진다. 실제 비즈니스 불변식이 동시에 지켜져야 하는 범위를 기준으로 정한다.
+
+## Domain Event
+
+Domain Event는 도메인에서 이미 발생한 중요한 사실을 표현한다.
+
+```text
+OrderCompleted
+PaymentApproved
+MemberWithdrawn
+```
+
+event 이름은 명령이 아니라 과거형 사실로 표현하는 편이 명확하다. 같은 process 안의 event listener도 transaction 성공 전후 어느 시점에 실행되는지 확인해야 한다. 다른 시스템으로 전달한다면 Outbox와 consumer idempotency가 필요하다.
+
+## Hexagonal Architecture
+
+Hexagonal Architecture는 application core와 외부 세계를 port와 adapter로 연결한다.
+
+```text
+Inbound Adapter
+→ REST Controller, message consumer, batch job
+
+Inbound Port
+→ application use case interface
+
+Application / Domain
+→ 핵심 규칙
+
+Outbound Port
+→ repository, payment client interface
+
+Outbound Adapter
+→ JPA repository 구현, HTTP client, Redis
+```
+
+Clean Architecture와 용어는 다르지만 핵심은 비슷하다. 비즈니스 규칙이 DB나 web framework를 직접 의존하지 않고 외부 기술이 안쪽에서 정의한 계약을 구현하게 한다.
+
+## Modular Monolith
+
+하나의 배포 단위를 유지하면서 내부를 독립적인 업무 module로 나누는 구조다.
+
+```text
+member module
+order module
+payment module
+```
+
+각 module은 공개 API만 노출하고 다른 module의 repository나 Entity를 직접 참조하지 않게 한다. microservice보다 배포와 transaction이 단순하면서도 경계를 연습할 수 있다.
+
+module 사이 결합이 낮고 독립 배포 필요성이 실제로 생겼을 때 일부를 service로 분리하기가 쉬워진다.
+
+## 구조 선택 기준
+
+```text
+단순 CRUD와 작은 팀
+→ 기능 중심 package를 사용한 Layered Architecture
+
+복잡한 상태 전이와 규칙
+→ rich domain model, Aggregate, Domain Service 강화
+
+외부 시스템과 저장 기술이 많음
+→ port와 adapter로 경계 분리
+
+업무 영역은 크지만 독립 배포 필요가 낮음
+→ Modular Monolith 고려
+
+팀과 배포가 실제로 독립적이고 확장 요구가 다름
+→ Microservice 검토
+```
+
+Architecture는 directory 이름이 아니라 의존성 규칙이다. `domain` package를 만들었다고 DDD가 되는 것도 아니고 interface를 많이 만들었다고 Clean Architecture가 되는 것도 아니다.
+
+## Overengineering 신호
+
+```text
+구현체가 하나뿐인데 모든 class에 의미 없는 interface가 있음
+DTO 변환 계층이 너무 많아 한 field 추가에 많은 파일 수정
+단순 CRUD가 여러 use case와 command 객체로 과도하게 분리
+경계 규칙을 자동 test하지 않아 package만 복잡함
+미래 가능성만으로 microservice를 먼저 분리
+```
+
+필요한 복잡성을 숨기지 말되 문제보다 구조가 더 복잡해지지 않도록 한다. 현재 변경 비용과 실패 위험을 줄이는 최소한의 구조에서 시작하고 실제 압력이 생길 때 확장한다.
+
 ## 설명할 때 핵심 문장
 
 ```text

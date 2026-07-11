@@ -78,10 +78,87 @@ Repository
 → 데이터 접근 담당
 
 Entity
-→ 도메인 데이터 표현
+→ DB 테이블과 매핑되고 영속성 컨텍스트가 관리하는 도메인 객체
 
 DTO
-→ 계층 간 데이터 전달
+→ API 경계에서 요청과 응답 데이터를 전달
+```
+
+## 한 요청이 처리되는 전체 과정
+
+회원 조회 요청 `GET /api/members/1`을 예로 들면 다음 순서로 진행된다.
+
+```text
+1. 클라이언트가 HTTP 요청 전송
+2. 웹 서버 또는 로드 밸런서가 애플리케이션으로 전달
+3. Tomcat이 요청을 받을 thread 할당
+4. Spring Security Filter가 인증과 인가 확인
+5. DispatcherServlet이 요청을 받을 Controller 탐색
+6. Controller가 path, query, body를 Java 값과 DTO로 변환
+7. Service가 비즈니스 규칙과 트랜잭션 처리
+8. Repository가 JPA를 통해 SQL 실행
+9. DB 결과가 Entity로 변환
+10. Entity를 응답 DTO로 변환
+11. Jackson이 DTO를 JSON으로 직렬화
+12. HTTP 상태 코드, header, body를 클라이언트에 반환
+```
+
+각 단계는 실패 지점도 다르다.
+
+```text
+인증 실패        → 401
+권한 부족        → 403
+요청 값 오류     → 400
+리소스 없음      → 404
+비즈니스 충돌    → 409
+처리되지 않은 오류 → 500
+```
+
+## 애플리케이션을 구성하는 객체
+
+```text
+Controller
+→ HTTP 형식과 애플리케이션 사이를 변환하는 adapter
+
+Application Service
+→ 하나의 use case를 조율하고 transaction 경계를 설정
+
+Domain
+→ 상태와 핵심 비즈니스 규칙을 표현
+
+Repository
+→ 저장소 접근을 추상화
+
+Infrastructure
+→ DB, Redis, Message Queue, 외부 API 같은 기술 구현
+```
+
+Controller가 Repository를 바로 호출할 수 없는 것은 아니지만, 비즈니스 규칙과 트랜잭션 경계가 Controller에 섞이기 쉽다. 일반적인 CRUD라도 Service를 두면 HTTP와 비즈니스 작업 단위를 분리할 수 있다.
+
+## 빌드부터 실행까지
+
+```text
+Java source
+→ Gradle 또는 Maven이 compile/test/package
+→ 실행 가능한 jar 생성
+→ JVM에서 java -jar로 실행
+→ Spring ApplicationContext 생성
+→ Bean 등록 및 의존관계 주입
+→ 내장 Tomcat 시작
+→ 요청 수신
+```
+
+Gradle과 Maven은 단순히 라이브러리를 내려받는 도구가 아니다. 소스 컴파일, 테스트, 패키징, 플러그인 실행과 의존성 버전 관리를 재현 가능한 절차로 만든다.
+
+## 백엔드 품질을 판단하는 기준
+
+```text
+정확성      → 비즈니스 규칙과 데이터 정합성을 지키는가?
+보안        → 인증, 인가, 입력 검증, 비밀 정보 보호가 되는가?
+성능        → 필요한 처리량과 응답 시간을 만족하는가?
+가용성      → 일부 장애가 전체 장애로 번지지 않는가?
+관측 가능성 → 로그, metric, trace로 원인을 찾을 수 있는가?
+변경 용이성 → 테스트와 책임 분리로 안전하게 수정할 수 있는가?
 ```
 
 ## 왜 계층을 나누는가?
