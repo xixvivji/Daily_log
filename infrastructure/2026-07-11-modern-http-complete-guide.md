@@ -22,7 +22,7 @@ Proxy, Gateway, Tunnel의 현대적 의미
 ## 장별 반영 기준
 
 | 기존 학습 범위 | 반영 방식 |
-|---|---|
+| --- | --- |
 | I. HTTP 웹의 기초 | 전체 핵심 반영 |
 | 5장 웹 서버 | 제품별 세부는 제외, Web Server·WAS·Origin 역할은 반영 |
 | 6장 프락시 | 옛 용어는 줄이고 Forward·Reverse Proxy와 신뢰 경계 반영 |
