@@ -532,6 +532,12 @@ curl -I https://api.example.com
 openssl s_client -connect api.example.com:443 -servername api.example.com
 ```
 
+## 다음 HTTP 심화 문서
+
+이 문서에서 입문 수준으로 다룬 Cache, Cookie, TLS, HTTP/2·3, Encoding과 내용 협상은 다음 문서에서 더 자세히 이어진다.
+
+- [2026-07-11 현대 HTTP 완성: 의미론, Cache, Cookie, TLS, HTTP/2·3, 인코딩](2026-07-11-modern-http-complete-guide.md)
+
 ## 최종 정리
 
 ```text

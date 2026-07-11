@@ -6,7 +6,7 @@
 
 `list.md`는 네트워크 기본부터 클라우드 운영까지 전체 공부 범위를 잡아둔 파일이고, `infrastructure/` 아래 파일들은 실제로 자세히 정리한 인프라 학습 노트다.
 
-현재 작성된 인프라 상세 노트는 다음 15개다.
+현재 작성된 인프라 상세 노트는 다음 16개다.
 
 ```text
 infrastructure/2026-07-03-network-basics-01.md
@@ -24,6 +24,7 @@ infrastructure/2026-07-10-dns-deep-dive.md
 infrastructure/2026-07-10-http-https-deep-dive.md
 infrastructure/2026-07-10-aws-network-deep-dive.md
 infrastructure/2026-07-10-network-troubleshooting-practice.md
+infrastructure/2026-07-11-modern-http-complete-guide.md
 ```
 
 ## 현재 자세히 정리된 부분
@@ -504,6 +505,49 @@ DNS부터 Application까지 장애 분석 순서
 ```text
 백엔드와 인프라 운영 기준 네트워크 마무리 정리 완료
 Kubernetes 네트워크, WAF/CDN, VPC Peering, Transit Gateway, PrivateLink 같은 확장 주제는 클라우드 학습에서 이어서 정리
+```
+
+## 15. 현대 HTTP 완성 보강
+
+관련 파일:
+
+```text
+infrastructure/2026-07-11-modern-http-complete-guide.md
+```
+
+정리된 내용:
+
+```text
+HTTP resource와 representation
+Safe method와 idempotent method
+Redirect 301, 302, 303, 307, 308
+Persistent connection과 connection pool
+HTTP timeout 종류
+Content-Length와 chunked encoding
+HTTP request smuggling 기초
+Content-Type과 Content-Encoding
+Multipart file upload
+Range request와 streaming
+Cache-Control과 cache 재검증
+ETag, Last-Modified, Vary
+내용 협상과 q 가중치
+UTF-8, charset, 언어 협상
+Cookie 속성과 CSRF
+Basic, Digest, Bearer 인증의 현대적 의미
+TLS 1.3 handshake, HSTS, session resumption
+HTTP/2 frame, stream, HPACK, flow control
+HTTP/3, QUIC, QPACK
+Web Server, Proxy, API Gateway, CONNECT tunnel
+WebSocket, SSE, gRPC
+robots.txt와 crawler 보안
+CDN, transcoding, 정적 콘텐츠 배포
+```
+
+상태:
+
+```text
+HTTP 학습 우선순위 상·중 항목 상세 정리 완료
+제외 항목 중 현대 백엔드와 클라우드에 필요한 핵심만 선별 보강 완료
 ```
 
 ## 네트워크 이후 보강하면 좋은 부분

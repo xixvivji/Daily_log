@@ -17,6 +17,7 @@
 <!-- NOTE_INDEX_START -->
 ### Infrastructure
 
+- [2026-07-11 현대 HTTP 완성: 의미론, Cache, Cookie, TLS, HTTP/2·3, 인코딩](infrastructure/2026-07-11-modern-http-complete-guide.md)
 - [2026-07-10 TCP 심화: 연결, 재전송, Timeout, Keep-Alive](infrastructure/2026-07-10-tcp-deep-dive.md)
 - [2026-07-10 네트워크 장애 분석 실전: DNS부터 Application까지](infrastructure/2026-07-10-network-troubleshooting-practice.md)
 - [2026-07-10 HTTP와 HTTPS 심화: 요청, 응답, Cache, CORS, TLS](infrastructure/2026-07-10-http-https-deep-dive.md)

@@ -159,6 +159,22 @@ CORS
 HTTP/1.1
 HTTP/2
 HTTP/3
+Safe Method / Idempotent Method
+Persistent Connection / Keep-Alive / Connection Pool
+HTTP Timeout
+Content-Length / Transfer-Encoding / Chunked
+Content-Encoding / gzip / Brotli
+Multipart / Range Request / Streaming
+ETag / Last-Modified / Conditional Request
+Cache freshness / 재검증 / Vary
+Cookie: Expires, Max-Age, Domain, Path, SameSite, Secure, HttpOnly
+내용 협상: Accept, Accept-Encoding, Accept-Language, q 값
+UTF-8 / Charset / Content-Language
+HTTP/2 Frame / Stream / HPACK / Flow Control
+HTTP/3 / QUIC / QPACK / Alt-Svc
+Authorization: Basic / Bearer
+API Gateway / CONNECT Tunnel / WebSocket Upgrade
+CDN / Origin / 정적 콘텐츠 배포
 ```
 
 ### HTTP - 왜 필요한가
@@ -186,6 +202,12 @@ TLS passthrough
 backend re-encryption
 mixed content
 secure cookie
+TLS 1.2 / TLS 1.3
+ALPN
+TLS session resumption
+0-RTT와 replay 위험
+HSTS
+인증서 자동 갱신
 ```
 
 ### HTTPS / TLS - 왜 필요한가
