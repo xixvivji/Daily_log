@@ -8,6 +8,8 @@ END = "<!-- NOTE_INDEX_END -->"
 SECTIONS = [
     ("Infrastructure", ROOT / "infrastructure"),
     ("Backend", ROOT / "backend"),
+    ("Cloud", ROOT / "cloud"),
+    ("DevOps", ROOT / "devops"),
 ]
 
 
@@ -20,7 +22,7 @@ def title_for(path: Path) -> str:
 
 def build_section(title: str, directory: Path) -> list[str]:
     lines = []
-    reverse = title != "Backend"
+    reverse = title == "Infrastructure"
     notes = [
         path for path in sorted(directory.glob("*.md"), reverse=reverse)
         if path.name.lower() != "readme.md"

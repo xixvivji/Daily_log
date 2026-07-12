@@ -11,6 +11,8 @@
 
 - [Infrastructure](infrastructure/)
 - [Backend](backend/)
+- [Cloud](cloud/)
+- [DevOps](devops/)
 
 ## Notes
 
@@ -60,4 +62,12 @@
 - [22. 외부 API 연동과 장애 격리](backend/22-external-api-resilience.md)
 - [23. Spring Batch 실전](backend/23-spring-batch.md)
 - [24. 성능 Test와 JVM·DB Tuning](backend/24-performance-testing-tuning.md)
+
+### Cloud
+
+- 아직 작성된 노트가 없습니다.
+
+### DevOps
+
+- 아직 작성된 노트가 없습니다.
 <!-- NOTE_INDEX_END -->
