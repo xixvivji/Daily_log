@@ -7,10 +7,12 @@
 ```text
 1. 네트워크 큰그림
 2. 프록시 / 리버스 프록시 / 라우팅
-3. 단일 EC2 + Docker + Nginx 기반 blue/green 배포 개념
+3. 단일 EC2 + Docker + Nginx 기반 upstream 트래픽 전환
 ```
 
 이 문서는 위 내용을 실제 배포 구조와 연결하기 위해 Nginx, Docker 네트워크, AWS 네트워크를 한 번에 묶어서 정리한다.
+
+Blue/Green은 여기서 Nginx 라우팅과 Docker 포트 매핑을 설명하는 사례로만 사용한다. 배포 전략의 선택과 운영 trade-off는 [DevOps 배포 전략 비교](../devops/03-deployment-strategies.md)에서 다룬다.
 
 ```text
 사용자
@@ -31,7 +33,7 @@ AWS에서는 이 구조를 VPC, Security Group, ALB로 어떻게 확장하는가
 
 ### Nginx를 알아야 하는 이유
 
-현재 blue/green 배포 구조에서 사용자의 요청을 실제 컨테이너로 보내는 핵심 역할은 Nginx가 한다.
+이 트래픽 전환 구조에서 사용자의 요청을 실제 active 컨테이너로 보내는 핵심 역할은 Nginx가 한다.
 
 ```text
 사용자
@@ -482,7 +484,7 @@ X-Forwarded-Proto가 왜 필요한지 설명할 수 있다.
 
 ```text
 Nginx는 외부 요청을 받아 active 컨테이너로 넘기는 리버스 프록시다.
-Docker 네트워크는 컨테이너 내부 포트와 호스트 포트를 분리해서 blue/green 구조를 가능하게 한다.
+Docker 네트워크는 컨테이너 내부 포트와 호스트 포트를 분리해 같은 application의 두 version을 동시에 실행하고 Nginx가 대상을 전환할 수 있게 한다.
 AWS VPC, Security Group, ALB는 단일 EC2 구조를 운영형 클라우드 구조로 확장하는 기반이다.
 DNS와 Route 53은 사용자의 도메인 요청을 ALB 또는 서버로 연결한다.
 HTTPS/TLS는 운영 서비스에서 전송 구간을 보호하고, TLS 종료 위치에 따라 프록시 헤더 처리가 중요해진다.

@@ -6,7 +6,7 @@
 
 `list.md`는 네트워크 기본부터 클라우드 운영까지 전체 공부 범위를 잡아둔 파일이고, `infrastructure/` 아래 파일들은 실제로 자세히 정리한 인프라 학습 노트다.
 
-현재 작성된 인프라 상세 노트는 다음 16개다.
+현재 작성된 인프라 상세 노트는 다음 15개다. 배포 전략 문서는 성격에 맞게 `devops/`로 분리했다.
 
 ```text
 infrastructure/2026-07-03-network-basics-01.md
@@ -14,7 +14,6 @@ infrastructure/2026-07-03-proxy-routing.md
 infrastructure/2026-07-04-nginx-proxy-routing-troubleshooting.md
 infrastructure/2026-07-06-nginx-docker-aws-infra-foundations.md
 infrastructure/2026-07-07-nginx-docker-aws-infra.md
-infrastructure/2026-07-07-deployment-strategies.md
 infrastructure/2026-07-07-nginx-docker-aws-operations.md
 infrastructure/2026-07-08-ip-subnet-mask-cidr.md
 infrastructure/2026-07-08-network-protocol-deep-dive.md
@@ -296,7 +295,19 @@ Kubernetes 네트워크 전체 구조, CNI, kube-proxy, NetworkPolicy는 별도 
 관련 파일:
 
 ```text
-infrastructure/2026-07-07-deployment-strategies.md
+devops/01-rolling-deployment.md
+devops/02-canary-progressive-delivery.md
+devops/03-deployment-strategies.md
+```
+
+분류 기준:
+
+```text
+Infrastructure 문서
+→ Nginx upstream, Docker port mapping, health check, traffic switching 구현
+
+DevOps 문서
+→ 전략 선택, resource 비용, rollout, promotion, rollback, 관측성과 자동화
 ```
 
 정리된 내용:

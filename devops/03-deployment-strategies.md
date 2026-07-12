@@ -1,4 +1,16 @@
-# 2026-07-07 배포 전략: Rolling, Blue/Green, Canary, Feature Flag
+# 03. 배포 전략 비교: Recreate, Rolling, Blue/Green, Canary
+
+## 문서 위치와 범위
+
+이 문서는 배포 전략의 선택 기준, 비용, 위험, rollback, DB 호환성을 다루므로 DevOps 영역에 둔다.
+
+Nginx와 Docker가 단일 EC2에서 요청 대상을 바꾸는 구체적인 원리는 Infrastructure 문서에서 다루고, 이 문서에서는 그 구성을 여러 배포 전략 중 하나로 평가한다.
+
+관련 상세 문서:
+
+- [Rolling Deployment 실전](01-rolling-deployment.md)
+- [Canary와 Progressive Delivery 실전](02-canary-progressive-delivery.md)
+- [Nginx 프록시와 트래픽 전환](../infrastructure/2026-07-04-nginx-proxy-routing-troubleshooting.md)
 
 ## 핵심 관점
 

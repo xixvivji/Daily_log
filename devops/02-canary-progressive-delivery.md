@@ -1,5 +1,7 @@
 # 02. Canary와 Progressive Delivery 실전
 
+전체 전략의 차이와 선택 기준은 [배포 전략 비교](03-deployment-strategies.md)에서 함께 비교한다.
+
 ## Canary Deployment란 무엇인가?
 
 새 version에 일부 traffic만 보내 실제 환경에서 검증한 뒤 점진적으로 비율을 높이는 전략이다.

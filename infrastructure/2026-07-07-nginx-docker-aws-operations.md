@@ -2,7 +2,7 @@
 
 ## 전체 그림
 
-지금까지 정리한 네트워크, 프록시, 라우팅, 배포 전략은 결국 아래 운영 구조를 이해하기 위한 기반이다.
+지금까지 정리한 네트워크, 프록시, 라우팅은 결국 아래 운영 트래픽 구조를 이해하기 위한 기반이다.
 
 ```text
 사용자
@@ -24,6 +24,8 @@
 ```
 
 이 구조를 제대로 설명하려면 Nginx, Docker 네트워크, AWS 네트워크, DNS, HTTPS, 모니터링, CI/CD를 연결해서 이해해야 한다.
+
+이 문서는 Nginx와 Docker가 traffic을 전환하는 인프라 구현에 집중한다. 전략 간 비교, resource trade-off와 rollback 정책은 [DevOps 배포 전략 비교](../devops/03-deployment-strategies.md)에서 다룬다.
 
 ## 1. Nginx 심화
 

@@ -2,7 +2,9 @@
 
 ## 현재 기준
 
-지금까지는 네트워크 큰그림, 프록시, 리버스 프록시, 라우팅, 단일 EC2 blue/green 배포 개념을 정리했다.
+지금까지는 네트워크 큰그림, 프록시, 리버스 프록시, 라우팅, 단일 EC2에서 Nginx가 active 컨테이너를 선택하는 구조를 정리했다.
+
+이 문서는 Nginx, Docker network, AWS network가 요청을 전달하는 방식을 다룬다. Blue/Green의 전략 선택, 비용, rollback과 자동화는 [DevOps 배포 전략 비교](../devops/03-deployment-strategies.md)에서 다룬다.
 
 이제부터는 실제 배포와 운영에서 바로 쓰이는 세부 주제로 들어가면 된다.
 
@@ -23,9 +25,7 @@
 3. AWS VPC / Security Group / ALB
 4. DNS / Route 53
 5. HTTPS / TLS
-6. CI/CD와 배포 자동화
-7. Monitoring / Logging
-8. Kubernetes Service / Ingress
+6. Kubernetes Service / Ingress
 ```
 
 ## 1. Nginx 심화

@@ -884,9 +884,11 @@ health check가 통과하는가?
 Nginx가 바라보는 포트와 active container 포트가 같은가?
 ```
 
-## 8. blue/green 배포와 연결해서 보기
+## 8. Nginx upstream 트래픽 전환과 연결해서 보기
 
-단일 EC2 blue/green 구조에서는 이 흐름이 중요하다.
+다음은 네트워크 요청이 단일 EC2의 Nginx를 거쳐 두 application version 중 active 대상으로 전달되는 예다.
+
+네트워크 관점의 핵심은 배포 전략 이름이 아니라 DNS, port, proxy upstream이 올바르게 이어지는지 확인하는 것이다. Blue/Green 자체의 선택 기준은 [DevOps 배포 전략 비교](../devops/03-deployment-strategies.md)에서 다룬다.
 
 ```text
 사용자

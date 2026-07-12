@@ -1,5 +1,7 @@
 # 01. Rolling Deployment 실전
 
+전체 전략의 차이와 선택 기준은 [배포 전략 비교](03-deployment-strategies.md)에서 함께 비교한다.
+
 ## Rolling Deployment란 무엇인가?
 
 실행 중인 instance나 container를 한 번에 모두 교체하지 않고 일정 개수씩 새 버전으로 바꾸는 배포 전략이다.
