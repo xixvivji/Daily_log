@@ -46,6 +46,16 @@ Spring Boot application 구현
 5. Spring Boot를 EC2에 배포하는 전체 흐름
 ```
 
+현재 작성 완료:
+
+```text
+01. Cloud와 AWS 전체 구조
+02. AWS Global Infrastructure
+03. IAM과 권한 관리
+```
+
+다음 작성 대상은 `04. EC2와 Compute`다.
+
 AWS Network는 기존 `infrastructure/`의 VPC, Subnet, Route Table 문서를 재사용하고 cloud architecture 관점에서 연결한다.
 
 ## 처음에는 뒤로 미룰 내용
