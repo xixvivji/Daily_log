@@ -71,5 +71,6 @@
 
 ### DevOps
 
-- 아직 작성된 노트가 없습니다.
+- [01. Rolling Deployment 실전](devops/01-rolling-deployment.md)
+- [02. Canary와 Progressive Delivery 실전](devops/02-canary-progressive-delivery.md)
 <!-- NOTE_INDEX_END -->
