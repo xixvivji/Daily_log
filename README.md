@@ -25,12 +25,10 @@
 - [2026-07-10 HTTP와 HTTPS 심화: 요청, 응답, Cache, CORS, TLS](infrastructure/2026-07-10-http-https-deep-dive.md)
 - [2026-07-10 DNS 심화: Resolver, Record, TTL, Route 53](infrastructure/2026-07-10-dns-deep-dive.md)
 - [2026-07-10 AWS 네트워크 심화: VPC, Subnet, Route Table, SG, NACL](infrastructure/2026-07-10-aws-network-deep-dive.md)
-- [2026-07-09 남은 네트워크 심화: Routing, NAT, DNS, TCP, HTTP, TLS, Firewall](infrastructure/2026-07-09-network-remaining-deep-dive.md)
+- [2026-07-09 Routing, NAT, ARP, UDP, Firewall 심화](infrastructure/2026-07-09-routing-nat-arp-udp-firewall.md)
 - [2026-07-08 네트워크 프로토콜 심화: TCP, DNS, HTTP, TLS](infrastructure/2026-07-08-network-protocol-deep-dive.md)
 - [2026-07-08 IP 주소와 서브넷 마스크: CIDR, 네트워크 범위, 게이트웨이](infrastructure/2026-07-08-ip-subnet-mask-cidr.md)
 - [2026-07-07 Nginx, Docker, AWS 운영 인프라 학습 내용](infrastructure/2026-07-07-nginx-docker-aws-operations.md)
-- [2026-07-07 Nginx, Docker 네트워크, AWS 배포 인프라 학습 정리](infrastructure/2026-07-07-nginx-docker-aws-infra.md)
-- [2026-07-06 Nginx, Docker, AWS 인프라 기반 개념 정리](infrastructure/2026-07-06-nginx-docker-aws-infra-foundations.md)
 - [2026-07-04 프록시와 라우팅 심화 개념 정리](infrastructure/2026-07-04-nginx-proxy-routing-troubleshooting.md)
 - [2026-07-03 프록시와 라우팅: Forward Proxy, Reverse Proxy, Ingress](infrastructure/2026-07-03-proxy-routing.md)
 - [2026-07-03 네트워크 기초 1: 네트워크의 전체 구조](infrastructure/2026-07-03-network-basics-01.md)
@@ -61,6 +59,10 @@
 - [22. 외부 API 연동과 장애 격리](backend/22-external-api-resilience.md)
 - [23. Spring Batch 실전](backend/23-spring-batch.md)
 - [24. 성능 Test와 JVM·DB Tuning](backend/24-performance-testing-tuning.md)
+- [25. 회원, 역할, 관리자 권한 모델링](backend/25-member-role-admin-authorization-model.md)
+- [26. OAuth 2.0과 OpenID Connect 로그인 실전](backend/26-oauth2-oidc-login.md)
+- [27. 파일 업로드와 Amazon S3 설계](backend/27-file-upload-s3.md)
+- [28. OpenAPI와 API 문서화](backend/28-openapi-api-documentation.md)
 
 ### Cloud
 

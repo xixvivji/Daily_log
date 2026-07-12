@@ -27,6 +27,13 @@
 
 이 문서는 Nginx와 Docker가 traffic을 전환하는 인프라 구현에 집중한다. 전략 간 비교, resource trade-off와 rollback 정책은 [DevOps 배포 전략 비교](../devops/03-deployment-strategies.md)에서 다룬다.
 
+반복 학습을 줄이기 위해 이 문서의 AWS, DNS, TLS 부분은 운영 구조를 연결하는 수준으로 읽고 세부 원리는 전용 문서를 기준으로 한다.
+
+- [AWS Network 심화](2026-07-10-aws-network-deep-dive.md)
+- [DNS 심화](2026-07-10-dns-deep-dive.md)
+- [HTTP와 HTTPS 심화](2026-07-10-http-https-deep-dive.md)
+- [네트워크 장애 분석](2026-07-10-network-troubleshooting-practice.md)
+
 ## 1. Nginx 심화
 
 ## Nginx의 역할

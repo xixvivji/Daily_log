@@ -290,6 +290,8 @@ credential cookie를 허용할 때는 허용 origin을 구체적으로 지정해
 
 ## 인가 적용 위치
 
+Role 단일 컬럼, 다중 Role, AdminProfile과 RBAC의 table/JPA 설계는 [회원, 역할, 관리자 권한 모델링](25-member-role-admin-authorization-model.md)에서 자세히 다룬다.
+
 URL 기반 규칙과 method 기반 규칙을 함께 사용할 수 있다.
 
 ```java
@@ -300,6 +302,8 @@ public void suspendMember(Long memberId) { ... }
 단순 role 확인 외에도 `주문 소유자 본인인가?`, `현재 상태에서 취소 가능한가?` 같은 resource 기반 규칙이 필요하다. Controller path만 막지 말고 use case 실행 지점에서도 권한과 도메인 규칙을 확인한다.
 
 ## OAuth 2.0과 OpenID Connect
+
+Authorization Code 흐름, provider 계정과 local Member 연결, 계정 탈취 방지와 Spring Security 구성은 [OAuth 2.0과 OpenID Connect 로그인 실전](26-oauth2-oidc-login.md)에서 이어서 다룬다.
 
 ```text
 OAuth 2.0

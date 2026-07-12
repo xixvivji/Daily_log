@@ -29,4 +29,8 @@
 22. 외부 API 연동과 장애 격리
 23. Spring Batch 실전
 24. 성능 Test와 JVM·DB Tuning
+25. 회원, 역할, 관리자 권한 모델링
+26. OAuth 2.0과 OpenID Connect 로그인 실전
+27. 파일 업로드와 Amazon S3 설계
+28. OpenAPI와 API 문서화
 ```

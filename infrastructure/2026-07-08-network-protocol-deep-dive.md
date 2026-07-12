@@ -2,6 +2,13 @@
 
 ## 핵심 관점
 
+이 문서는 TCP, DNS, HTTP, TLS 각각의 세부 내용을 반복하는 전용 심화 문서가 아니라, 한 요청에서 네 protocol이 어떤 순서로 연결되고 장애 계층을 어떻게 구분하는지 보는 통합 문서다.
+
+- [TCP 심화](2026-07-10-tcp-deep-dive.md)
+- [DNS 심화](2026-07-10-dns-deep-dive.md)
+- [HTTP와 HTTPS 심화](2026-07-10-http-https-deep-dive.md)
+- [현대 HTTP 완성](2026-07-11-modern-http-complete-guide.md)
+
 지금까지 정리한 내용은 아래 흐름을 이해하는 데 집중했다.
 
 ```text

@@ -6,18 +6,16 @@
 
 `list.md`는 네트워크 기본부터 클라우드 운영까지 전체 공부 범위를 잡아둔 파일이고, `infrastructure/` 아래 파일들은 실제로 자세히 정리한 인프라 학습 노트다.
 
-현재 작성된 인프라 상세 노트는 다음 15개다. 배포 전략 문서는 성격에 맞게 `devops/`로 분리했다.
+현재 작성된 인프라 상세 노트는 다음 13개다. 중복된 초기 종합 문서는 통합했고 배포 전략 문서는 성격에 맞게 `devops/`로 분리했다.
 
 ```text
 infrastructure/2026-07-03-network-basics-01.md
 infrastructure/2026-07-03-proxy-routing.md
 infrastructure/2026-07-04-nginx-proxy-routing-troubleshooting.md
-infrastructure/2026-07-06-nginx-docker-aws-infra-foundations.md
-infrastructure/2026-07-07-nginx-docker-aws-infra.md
 infrastructure/2026-07-07-nginx-docker-aws-operations.md
 infrastructure/2026-07-08-ip-subnet-mask-cidr.md
 infrastructure/2026-07-08-network-protocol-deep-dive.md
-infrastructure/2026-07-09-network-remaining-deep-dive.md
+infrastructure/2026-07-09-routing-nat-arp-udp-firewall.md
 infrastructure/2026-07-10-tcp-deep-dive.md
 infrastructure/2026-07-10-dns-deep-dive.md
 infrastructure/2026-07-10-http-https-deep-dive.md
@@ -255,8 +253,6 @@ DB migration 호환성, connection draining, rollback 자동화는 실무 사례
 관련 파일:
 
 ```text
-infrastructure/2026-07-06-nginx-docker-aws-infra-foundations.md
-infrastructure/2026-07-07-nginx-docker-aws-infra.md
 infrastructure/2026-07-07-nginx-docker-aws-operations.md
 ```
 
@@ -423,45 +419,27 @@ TCP congestion control, HTTP/2, HTTP/3, DNSSEC은 별도 심화 주제로 분리
 관련 파일:
 
 ```text
-infrastructure/2026-07-09-network-remaining-deep-dive.md
+infrastructure/2026-07-09-routing-nat-arp-udp-firewall.md
 ```
 
 정리된 내용:
 
 ```text
-Routing Table
-Default Route
-Longest Prefix Match
-AWS Route Table
-Public Subnet과 Private Subnet 차이
-Internet Gateway
-NAT와 NAT Gateway
-ARP
-DNS recursive query와 iterative query
-TTL과 DNS 캐시
-TCP 3-way handshake / 4-way handshake
-TIME_WAIT
-connection refused와 connection timed out
-UDP
-HTTP 요청/응답 구조
-HTTP Cache
-HTTP/1.1, HTTP/2, HTTP/3 차이
-HTTPS / TLS handshake
-인증서 검증
-SNI
-TLS Termination
-X-Forwarded-Proto
-Firewall
-Security Group
-NACL
-운영 장애 분석 순서
+Routing Table과 Longest Prefix Match
+Default Route와 next hop
+ARP와 next-hop MAC
+NAT, PAT, SNAT, DNAT
+UDP 특성과 장애 확인
+Stateful / Stateless Firewall
+Security Group과 NACL
+Routing, ARP, NAT, Firewall 연결 흐름
 ```
 
 상태:
 
 ```text
-남은 네트워크 핵심 심화 주제 정리 완료
-추가로 더 깊게 볼 내용은 TCP congestion control, DNSSEC, HTTP/3 내부 동작, 실제 패킷 캡처 분석 정도로 축소됨
+TCP, DNS, HTTP, TLS 중복 설명은 각 전용 문서로 통합 완료
+Routing, NAT, ARP, UDP, Firewall의 고유 내용만 별도 문서로 정리 완료
 ```
 
 ## 14. 네트워크 마무리 심화 5개
@@ -663,5 +641,5 @@ Terraform 기초
 
 ```text
 네트워크 큰그림, IP/CIDR, 라우팅, NAT, DNS, TCP, UDP, HTTP, TLS, 방화벽, 프록시, Nginx, Docker 네트워크, AWS 네트워크, 장애 분석까지 상세 노트가 작성되어 있다.
-이제 네트워크는 마무리하고, 다음 흐름은 백엔드 정리로 넘어가면 된다.
+네트워크는 중복 종합본을 정리했고, 백엔드는 역할·관리자 권한, OAuth 로그인, 파일·S3, OpenAPI까지 보강했다.
 ```
