@@ -8,6 +8,7 @@ END = "<!-- NOTE_INDEX_END -->"
 SECTIONS = [
     ("Infrastructure", ROOT / "infrastructure"),
     ("Backend", ROOT / "backend"),
+    ("Database", ROOT / "database"),
     ("Cloud", ROOT / "cloud"),
     ("DevOps", ROOT / "devops"),
 ]

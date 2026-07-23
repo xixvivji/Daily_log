@@ -11,6 +11,7 @@
 
 - [Infrastructure](infrastructure/)
 - [Backend](backend/)
+- [Database](database/)
 - [Cloud](cloud/)
 - [DevOps](devops/)
 
@@ -63,6 +64,20 @@
 - [26. OAuth 2.0과 OpenID Connect 로그인 실전](backend/26-oauth2-oidc-login.md)
 - [27. 파일 업로드와 Amazon S3 설계](backend/27-file-upload-s3.md)
 - [28. OpenAPI와 API 문서화](backend/28-openapi-api-documentation.md)
+
+### Database
+
+- [데이터베이스 첫걸음](database/00-beginner-database-foundation.md)
+- [00. PPT 1~33장 순차 학습 가이드](database/00-ppt-sequential-study-guide.md)
+- [01. 데이터베이스 강의 전체 지도와 핵심 용어](database/01-database-course-map-and-glossary.md)
+- [02. 관계형 모델링과 SQL](database/02-relational-modeling-and-sql.md)
+- [03. 인덱스, 실행 계획, SQL 튜닝](database/03-index-query-plan-and-tuning.md)
+- [04. MVCC, 트랜잭션, Lock](database/04-mvcc-transaction-and-lock.md)
+- [05. DBMS 선택, MySQL 대안, 마이그레이션](database/05-dbms-selection-and-migration.md)
+- [06. 분산·Cloud DB와 운영](database/06-distributed-cloud-and-operations.md)
+- [07. 녹음 구간 정리](database/07-audio-notes.md)
+- [MySQL·PostgreSQL·Oracle 비교 가이드](database/08-cross-dbms-comparison-guide.md)
+- [PPT 33장 정리 완성도 점검표](database/09-ppt-coverage-audit.md)
 
 ### Cloud
 
