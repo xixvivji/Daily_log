@@ -14,6 +14,7 @@
 - [Database](database/)
 - [Cloud](cloud/)
 - [DevOps](devops/)
+- [Data Analysis & AIOps](data-aiops/)
 
 ## Notes
 
@@ -90,4 +91,8 @@
 - [01. Rolling Deployment 실전](devops/01-rolling-deployment.md)
 - [02. Canary와 Progressive Delivery 실전](devops/02-canary-progressive-delivery.md)
 - [03. 배포 전략 비교: Recreate, Rolling, Blue/Green, Canary](devops/03-deployment-strategies.md)
+
+### Data Analysis & AIOps
+
+- [01. 데이터 분석 개요 및 기초통계 - Day 1](data-aiops/01-data-analysis-and-basic-statistics-day1.md)
 <!-- NOTE_INDEX_END -->
