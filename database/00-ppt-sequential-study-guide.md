@@ -230,6 +230,7 @@ Nested Loop
 
 - [JOIN 알고리즘](03-index-query-plan-and-tuning.md)
 - [집계·JOIN·Subquery·CTE·Window Function 상세](concepts/advanced-sql-cross-dbms.md)
+- [Nested Loop·Hash Join·Merge Join 실행 원리와 계획 읽기](concepts/view-join-bitmap-execution-plan.md)
 
 ### 12. JOIN 종류 - PDF 117~124
 
@@ -282,6 +283,7 @@ WITH
 
 - [CTE·View·Materialized View](02-relational-modeling-and-sql.md)
 - [집계·JOIN·Subquery·CTE·Window Function 상세](concepts/advanced-sql-cross-dbms.md)
+- [View·Materialized View·SQL Server Indexed View 상세](concepts/view-join-bitmap-execution-plan.md)
 
 ### 15. Window Function과 SQL 실전 패턴 - PDF 136~212
 
@@ -348,6 +350,7 @@ EXPLAIN
 - [대표 Scan](03-index-query-plan-and-tuning.md)
 - [실행 계획에서 볼 것](03-index-query-plan-and-tuning.md)
 - [특수 Index·Partition·고급 설계](concepts/advanced-index-partition-design.md)
+- [Bitmap Index Scan → Bitmap Heap Scan과 JOIN 실행 계획 상세](concepts/view-join-bitmap-execution-plan.md)
 
 ### 19. SQL 튜닝과 느린 Query - PDF 249~267
 
