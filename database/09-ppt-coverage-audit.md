@@ -51,14 +51,14 @@ Production Migration 실행 보장
 | 8 | 92~95 | 종합 실습 1 | 정리 제외 | 목표와 복습 경로만 제공 |
 | 9 | 97~101 | DBMS 생태계·MSA 연동 | 개념 상세 | Redis·Kafka·Elasticsearch·CDC |
 | 10 | 102~109 | 집계·Group | 개념 상세 | Aggregate·ROLLUP·CUBE·FILTER |
-| 11 | 110~116 | JOIN Algorithm | 개념 상세 | NL·Hash·Merge·BNL·BKA |
+| 11 | 110~116 | JOIN Algorithm | 개념 상세 | NL·Hash·Merge의 내부 동작·선택 조건·plan 지표, BNL·BKA |
 | 12 | 117~124 | JOIN 종류 | 개념 상세 | INNER·OUTER·Semi·Anti |
 | 13 | 125~129 | Subquery·집합 연산 | 개념 상세 | IN·EXISTS·ANY·ALL·집합 연산 |
-| 14 | 130~135 | CTE·View·Materialized View | 개념 상세 | Recursive CTE·DBMS별 MV |
+| 14 | 130~135 | CTE·View·Materialized View | 개념 상세 | Recursive CTE·DBMS별 MV·SQL Server Indexed View·refresh 설계 |
 | 15 | 136~212 | Window·SQL 실전 패턴 | 개념 상세 | Window Frame·집계·JSON |
 | 16 | 213~223 | 종합 실습 2 | 정리 제외 | 목표와 복습 경로만 제공 |
 | 17 | 225~240 | Index | 개념 상세 | B-Tree·Hash·GIN·GiST·BRIN |
-| 18 | 241~248 | 실행 계획 | 개념 상세 | Scan·Join·Estimate·실행 계획 |
+| 18 | 241~248 | 실행 계획 | 개념 상세 | Scan·Join·Estimate·Bitmap Index/Heap Scan·exact/lossy bitmap |
 | 19 | 249~267 | SQL Tuning | 개념 상세 | Anti-pattern·통계·Partition Pruning |
 | 20 | 268~278 | MVCC·Isolation | 개념 상세 | MVCC·SSI·DBMS별 격리 |
 | 21 | 279~290 | Lock·Deadlock | 개념 상세 | Lock 종류·Deadlock·Retry |
@@ -153,4 +153,3 @@ Header Fragment Link
 모든 상세 Link
 → Markdown File 직접 열기 방식
 ```
-
