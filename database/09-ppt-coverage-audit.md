@@ -46,10 +46,10 @@ Production Migration 실행 보장
 | 3 | 37~45 | ERD·Attribute·IE·DBML | 개념 상세 | ERD, Cardinality, IE, DBML |
 | 4 | 46~52 | 개념·논리·물리 모델 | 개념 상세 | 관계형 모델링, Index·Partition 설계 |
 | 5 | 53~69 | Schema 전략·RDBMS·ANSI SQL | 개념 상세 | Schema 차이, Silo·Pool·Bridge, ANSI SQL |
-| 6 | 70~86 | DDL | 개념 상세 | Cross-DBMS DDL |
-| 7 | 87~91 | DML·함수·CASE | 개념 상세 | Cross-DBMS DML |
+| 6 | 70~86 | DDL | 개념 상세 | Cross-DBMS DDL·Online DDL·Expand/Contract |
+| 7 | 87~91 | DML·함수·CASE | 개념 상세 | Cross-DBMS DML·NULL 3값 논리·Collation·Timezone |
 | 8 | 92~95 | 종합 실습 1 | 정리 제외 | 목표와 복습 경로만 제공 |
-| 9 | 97~101 | DBMS 생태계·MSA 연동 | 개념 상세 | Redis·Kafka·Elasticsearch·CDC |
+| 9 | 97~101 | DBMS 생태계·MSA 연동 | 개념 상세 | Redis·Kafka·Elasticsearch·CDC·Connection Pool·ORM |
 | 10 | 102~109 | 집계·Group | 개념 상세 | Aggregate·ROLLUP·CUBE·FILTER |
 | 11 | 110~116 | JOIN Algorithm | 개념 상세 | NL·Hash·Merge의 내부 동작·선택 조건·plan 지표, BNL·BKA |
 | 12 | 117~124 | JOIN 종류 | 개념 상세 | INNER·OUTER·Semi·Anti |
@@ -57,10 +57,10 @@ Production Migration 실행 보장
 | 14 | 130~135 | CTE·View·Materialized View | 개념 상세 | Recursive CTE·DBMS별 MV·SQL Server Indexed View·refresh 설계 |
 | 15 | 136~212 | Window·SQL 실전 패턴 | 개념 상세 | Window Frame·집계·JSON |
 | 16 | 213~223 | 종합 실습 2 | 정리 제외 | 목표와 복습 경로만 제공 |
-| 17 | 225~240 | Index | 개념 상세 | B-Tree·Hash·GIN·GiST·BRIN |
-| 18 | 241~248 | 실행 계획 | 개념 상세 | Scan·Join·Estimate·Bitmap Index/Heap Scan·exact/lossy bitmap |
+| 17 | 225~240 | Index | 개념 상세 | B-Tree·Hash·GIN·GiST·BRIN·Page Split·Clustered 구조 |
+| 18 | 241~248 | 실행 계획 | 개념 상세 | Scan·Join·Estimate·Bitmap Index/Heap Scan·buffer/page I/O |
 | 19 | 249~267 | SQL Tuning | 개념 상세 | Anti-pattern·통계·Partition Pruning |
-| 20 | 268~278 | MVCC·Isolation | 개념 상세 | MVCC·SSI·DBMS별 격리 |
+| 20 | 268~278 | MVCC·Isolation | 개념 상세 | MVCC·SSI·DBMS별 격리·VACUUM·purge·undo·transaction 경계 |
 | 21 | 279~290 | Lock·Deadlock | 개념 상세 | Lock 종류·Deadlock·Retry |
 | 22 | 291~319 | 고급 설계 | 개념 상세 | BCNF·4NF·5NF·SCD·Sharding |
 | 23 | 320~325 | 종합 실습 3 | 정리 제외 | 목표와 복습 경로만 제공 |

@@ -131,6 +131,7 @@ Silo·Pool·Bridge Model
 - [DBMS 선택 기준](05-dbms-selection-and-migration.md)
 - [MySQL과 PostgreSQL SQL·DDL 차이](05-dbms-selection-and-migration.md)
 - [Silo·Pool·Bridge 멀티테넌시와 ANSI SQL](concepts/schema-multitenancy-and-ansi-sql.md)
+- [NULL·Collation·Timezone의 DBMS별 차이](concepts/null-collation-timezone.md)
 
 ### 6. SQL 기초 DDL - PDF 70~86
 
@@ -150,6 +151,7 @@ CREATE DATABASE
 - [타입 선택](02-relational-modeling-and-sql.md)
 - [Key와 Constraint](01-database-course-map-and-glossary.md)
 - [DDL·DML을 MySQL·PostgreSQL·Oracle로 비교](concepts/ddl-dml-cross-dbms.md)
+- [무중단 Schema 변경·Online DDL](concepts/zero-downtime-schema-migration.md)
 
 ### 7. SQL 기초 DML - PDF 87~91
 
@@ -167,6 +169,7 @@ SELECT
 
 - [DDL·DML 구분](02-relational-modeling-and-sql.md)
 - [DDL·DML을 MySQL·PostgreSQL·Oracle로 비교](concepts/ddl-dml-cross-dbms.md)
+- [NULL과 SQL 3값 논리·문자열·시간 처리](concepts/null-collation-timezone.md)
 
 ### 8. 종합 실습 1 - PDF 92~95
 
@@ -196,6 +199,7 @@ DDL·DML 복습
 
 - [OLTP·OLAP·HTAP](01-database-course-map-and-glossary.md)
 - [Redis·Kafka·Elasticsearch 역할](06-distributed-cloud-and-operations.md)
+- [Application Connection·Pool·ORM·Transaction](concepts/application-connection-pool-orm-transaction.md)
 
 ### 10. SQL 집계와 그룹화 - PDF 102~109
 
@@ -332,6 +336,7 @@ B-Tree·Hash
 - [B-Tree와 복합 Index](03-index-query-plan-and-tuning.md)
 - [Covering·Partial·Expression Index](03-index-query-plan-and-tuning.md)
 - [특수 Index·Partition·고급 설계](concepts/advanced-index-partition-design.md)
+- [Page·Clustered Index·Page Split·B-Tree 내부](concepts/storage-page-index-vacuum-internals.md)
 
 ### 18. 실행 계획 분석 - PDF 241~248
 
@@ -351,6 +356,7 @@ EXPLAIN
 - [실행 계획에서 볼 것](03-index-query-plan-and-tuning.md)
 - [특수 Index·Partition·고급 설계](concepts/advanced-index-partition-design.md)
 - [Bitmap Index Scan → Bitmap Heap Scan과 JOIN 실행 계획 상세](concepts/view-join-bitmap-execution-plan.md)
+- [Buffer·Page I/O·통계·Cardinality Estimation](concepts/storage-page-index-vacuum-internals.md)
 
 ### 19. SQL 튜닝과 느린 Query - PDF 249~267
 
@@ -371,6 +377,7 @@ Index 컬럼 함수 적용
 - [느린 Query 찾기](03-index-query-plan-and-tuning.md)
 - [튜닝 순서](03-index-query-plan-and-tuning.md)
 - [특수 Index·Partition·고급 설계](concepts/advanced-index-partition-design.md)
+- [Connection Pool·N+1·Timeout·Prepared Statement](concepts/application-connection-pool-orm-transaction.md)
 
 ### 20. MVCC와 Isolation Level - PDF 268~278
 
@@ -389,6 +396,8 @@ MVCC
 - [MVCC](04-mvcc-transaction-and-lock.md)
 - [Isolation Level 개요](04-mvcc-transaction-and-lock.md)
 - [Isolation Level별 이상 현상 상세](concepts/isolation-level-anomalies.md)
+- [Row Version·VACUUM·Autovacuum·HOT Update](concepts/storage-page-index-vacuum-internals.md)
+- [Application Transaction 경계와 동시 갱신](concepts/application-connection-pool-orm-transaction.md)
 
 ### 21. Lock과 Deadlock - PDF 279~290
 
@@ -613,7 +622,7 @@ E-commerce data로 매출, AOV, category 성과, 재구매, RFM, 재고를 분�
 3. [실행 계획](03-index-query-plan-and-tuning.md)
 4. [튜닝 순서](03-index-query-plan-and-tuning.md)
 
-## 지금까지 추가된 상세 설명 위치
+## 자주 찾는 상세 설명 위치
 
 PPT를 보다가 아래 개념이 나오면 해당 링크를 누른다.
 
@@ -624,6 +633,15 @@ PPT를 보다가 아래 개념이 나오면 해당 링크를 누른다.
 | WAL·Undo·Redo·Checkpoint | [Log와 복구](concepts/wal-undo-redo-checkpoint.md) |
 | WAL과 Consensus | [Local 복구와 분산 합의](concepts/wal-and-consensus.md) |
 | Isolation Level 허용 현상 | [동시성 이상 현상](concepts/isolation-level-anomalies.md) |
+| Relationship·정규화 | [관계 구현과 정규화](concepts/relationship-and-normalization.md) |
+| ERD 작성·Cardinality·IE 표기 | [ERD 작성 순서](concepts/erd-writing-process.md) |
+| View·Materialized View·Indexed View | [View 계열 상세](concepts/view-join-bitmap-execution-plan.md) |
+| Nested Loop·Hash·Merge Join | [JOIN 실행 알고리즘](concepts/view-join-bitmap-execution-plan.md) |
+| Bitmap Index Scan·Bitmap Heap Scan | [Bitmap 실행 계획](concepts/view-join-bitmap-execution-plan.md) |
+| Connection Pool·ORM·Transaction | [Application과 DB 연결](concepts/application-connection-pool-orm-transaction.md) |
+| NULL·Collation·Timezone | [값·문자열·시간의 DBMS 차이](concepts/null-collation-timezone.md) |
+| Page·Index·VACUUM 내부 | [저장 구조와 공간 정리](concepts/storage-page-index-vacuum-internals.md) |
+| Online DDL·무중단 변경 | [Schema Migration](concepts/zero-downtime-schema-migration.md) |
 
 ## 사용 방법
 
