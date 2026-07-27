@@ -75,6 +75,7 @@ Cloud에서 Spring Boot를 한 번 수동 배포한 다음 아래 순서로 진�
 01. Rolling Deployment 실전
 02. Canary와 Progressive Delivery 실전
 03. 배포 전략 비교: Recreate, Rolling, Blue/Green, Canary
+04. Amazon ECS와 ALB 배포 실전
 ```
 
 Blue/Green의 전략 선택, 비용, rollback은 DevOps 문서에서 다룬다. 단일 EC2에서 Nginx와 Docker로 traffic을 전환하는 구현 원리는 Infrastructure 문서에 사례로 남겨 두며, 이후 CI/CD와 Monitoring 문서에서 자동 promotion과 rollback으로 연결한다.
