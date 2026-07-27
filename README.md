@@ -91,6 +91,7 @@
 - [01. Rolling Deployment 실전](devops/01-rolling-deployment.md)
 - [02. Canary와 Progressive Delivery 실전](devops/02-canary-progressive-delivery.md)
 - [03. 배포 전략 비교: Recreate, Rolling, Blue/Green, Canary](devops/03-deployment-strategies.md)
+- [04. Amazon ECS와 ALB 배포 실전](devops/04-ecs-alb-deployment.md)
 
 ### Data Analysis & AIOps
 
