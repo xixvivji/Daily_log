@@ -96,4 +96,5 @@
 ### Data Analysis & AIOps
 
 - [01. 데이터 분석 개요 및 기초통계 - Day 1](data-aiops/01-data-analysis-and-basic-statistics-day1.md)
+- [02. 상관분석과 회귀분석 - Day 2](data-aiops/02-correlation-and-regression-day2.md)
 <!-- NOTE_INDEX_END -->

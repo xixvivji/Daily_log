@@ -5,6 +5,7 @@
 ## 학습 문서
 
 - [01. 데이터 분석 개요 및 기초통계 - Day 1](01-data-analysis-and-basic-statistics-day1.md)
+- [02. 상관분석과 회귀분석 - Day 2](02-correlation-and-regression-day2.md)
 
 ## 학습 방향
 
@@ -16,4 +17,3 @@
 → 로그·메트릭·트레이스에 적용
 → 이상 탐지와 운영 의사결정 자동화
 ```
-
