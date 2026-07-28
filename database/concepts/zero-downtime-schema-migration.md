@@ -218,7 +218,7 @@ FK child column index는 parent 삭제·변경과 JOIN 성능에 중요하지만
 배포 전에 구·신 application과 구·신 schema 조합을 기록한다.
 
 | Application | 기존 Schema | 확장 Schema | 축소 후 Schema |
-|---|---:|---:|---:|
+| --- | ---: | ---: | ---: |
 | 구버전 | 가능 | 가능해야 함 | 보통 불가능 |
 | 신버전 | 가능하도록 설계할 수 있음 | 가능 | 가능 |
 

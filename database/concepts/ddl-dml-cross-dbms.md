@@ -460,4 +460,3 @@ DDL implicit commit
 ```
 
 문법 변환 후에는 row count만 보지 말고 업무 query 결과와 정렬, NULL, 날짜 경계를 검증한다.
-

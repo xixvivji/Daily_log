@@ -6,6 +6,9 @@
       "allowed_elements": [
         "br"
       ]
+    },
+    "MD060": {
+      "style": "compact"
     }
   },
   "ignores": [

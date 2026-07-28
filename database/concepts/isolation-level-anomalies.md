@@ -276,4 +276,3 @@ Serializable
 ```
 
 격리 수준 이름보다 실제 업무에서 막아야 하는 lost update, write skew, 중복 처리와 DBMS의 구현을 함께 확인해야 한다.
-

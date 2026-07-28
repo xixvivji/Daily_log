@@ -187,4 +187,3 @@ LIMIT 20 OFFSET 100000
 - 전 세계 multi-region write와 합의가 필수
 
 그래도 benchmark와 운영 난이도, 일관성 요구, migration 비용으로 검증해야 한다.
-

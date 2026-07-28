@@ -277,4 +277,3 @@ Ref: order_items.product_id > products.id
 - 삭제 정책을 무조건 CASCADE로 설정
 - 자동 생성 DDL의 type을 검토하지 않음
 - 논리 ERD와 물리 ERD를 구분하지 않음
-

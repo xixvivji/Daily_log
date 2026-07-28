@@ -142,4 +142,3 @@ DB 선택 story의 좋은 구조:
 - PostgreSQL: `EXPLAIN (ANALYZE, BUFFERS)`로 scan과 row 추정 확인
 - DBMS: 같은 schema와 핵심 query를 MySQL/PostgreSQL에서 비교
 - 기록: 변경값, 측정 환경, 전후 수치, 부작용까지 남기기
-

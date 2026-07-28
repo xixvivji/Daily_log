@@ -57,7 +57,7 @@ REFRESH MATERIALIZED VIEW daily_sales;
 DBMS별로 같은 이름이라도 기능이 다르다.
 
 | DBMS | 대표 방식 | 알아둘 점 |
-|---|---|---|
+| --- | --- | --- |
 | PostgreSQL | `CREATE/REFRESH MATERIALIZED VIEW` | 일반 Refresh와 동시 Refresh의 잠금·선행 조건이 다르다. `CONCURRENTLY` 사용에는 적절한 unique index 등이 필요하다. |
 | Oracle | Materialized View, query rewrite, refresh 옵션 | `COMPLETE`, `FAST`, `FORCE`, `ON DEMAND`, `ON COMMIT` 등 선택지가 있으며 Fast Refresh 가능 여부는 MV 정의와 log 구성에 달려 있다. |
 | SQL Server | Indexed View | 별도의 MV 문법 대신 schema-bound View에 실제 index를 만들어 결과를 물리화한다. |
@@ -135,7 +135,7 @@ hash table이 작업 메모리를 넘으면 여러 batch로 나뉘고 임시 디
 ### 빠른 비교
 
 | 알고리즘 | 잘 맞는 상황 | 주요 위험 신호 |
-|---|---|---|
+| --- | --- | --- |
 | Nested Loop | 작은 outer + 빠른 inner index lookup | inner의 매우 큰 `loops`, 잘못된 row 추정 |
 | Hash Join | 큰 equi-join, 정렬되지 않은 입력 | hash batches 증가, memory 부족과 spill |
 | Merge Join | 이미 정렬된 입력, 넓은 범위 처리 | 큰 Sort, disk spill, 중복 key 폭증 |

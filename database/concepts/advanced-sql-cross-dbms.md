@@ -714,4 +714,3 @@ Array
 Window Frame
 → 기본값과 지원 범위 확인
 ```
-

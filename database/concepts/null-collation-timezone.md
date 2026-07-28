@@ -20,7 +20,7 @@ Oracle Database는 SQL의 문자 처리에서 길이 0인 문자열을 NULL처�
 일반 논리에는 TRUE와 FALSE가 있지만 NULL이 참여하는 SQL 조건에는 UNKNOWN이 생긴다.
 
 | 비교 | 결과 |
-|---|---|
+| --- | --- |
 | `10 = 10` | TRUE |
 | `10 = 20` | FALSE |
 | `10 = NULL` | UNKNOWN |

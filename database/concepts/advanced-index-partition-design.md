@@ -463,4 +463,3 @@ Sharding
 ```
 
 Partitioning은 optimizer와 DBMS가 투명하게 처리하는 경우가 많지만 sharding은 routing, cross-shard transaction, rebalancing이 추가된다.
-

@@ -65,7 +65,7 @@ MySQL query를 PostgreSQL 방식으로 다시 튜닝하거나, MySQL에서 다�
 | JSON | binary internal JSON과 함수 | `json`, `jsonb`, GIN |
 | 대소문자 무시 검색 | collation 영향, `LIKE` | `ILIKE`, collation, `citext` |
 | identifier quote | backtick | double quote |
-| string concat | `CONCAT()` | `||`, `concat()` |
+| string concat | `CONCAT()` | `\|\|`, `concat()` |
 | timezone | `TIMESTAMP`, `DATETIME` 동작 구분 | `timestamp`, `timestamptz` 구분 |
 | index | generated/functional index 등 | expression, partial, INCLUDE, GIN/GiST 등 |
 
@@ -164,4 +164,3 @@ rollback 시 새 DB에서 발생한 쓰기를 어떻게 되돌릴지가 문서�
 팀이 backup, restore, failover, tuning을 운영할 수 있는가?
 전환 중 데이터 정합성과 rollback을 보장할 수 있는가?
 ```
-

@@ -132,4 +132,3 @@ replica는 synchronous인가 asynchronous인가?
 serialization failure와 deadlock을 application이 retry하는가?
 failover 시 허용할 RPO와 RTO는 얼마인가?
 ```
-

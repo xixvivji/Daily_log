@@ -265,4 +265,3 @@ commit 시 LGWR의 redo 기록이 핵심이며, 모든 dirty data block이 commi
 → 미완료 transaction을 보이지 않게 하거나 undo
 → 일관된 상태로 service 재개
 ```
-

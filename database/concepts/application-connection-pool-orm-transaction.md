@@ -45,7 +45,7 @@ Connection Pool은 미리 만들었거나 재사용 가능한 연결 집합이�
 ### 기본 용어
 
 | 용어 | 의미 |
-|---|---|
+| --- | --- |
 | minimum/idle size | 유휴 상태로 유지할 최소 연결 수 |
 | maximum pool size | 해당 application instance가 동시에 보유할 최대 연결 수 |
 | acquire timeout | pool에서 connection을 기다릴 최대 시간 |
@@ -89,7 +89,7 @@ Pool 크기는 다음을 함께 측정해 정한다.
 ## 4. Timeout 종류
 
 | Timeout | 막으려는 상황 | 발생 위치 |
-|---|---|---|
+| --- | --- | --- |
 | connect timeout | DB에 연결 자체가 되지 않음 | driver/network |
 | acquire timeout | pool에 반환되는 connection이 없음 | application pool |
 | query/statement timeout | SQL 실행이 너무 오래 걸림 | driver 또는 DBMS |
@@ -256,7 +256,7 @@ WHERE order_id = :id
 ## 10. DBMS와 Proxy 차이
 
 | 영역 | MySQL | PostgreSQL | Oracle |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | session 구현 | server thread/session과 연결 | 보통 connection당 backend process | server process/session 구조 |
 | 외부 pool/proxy 예 | application pool, ProxySQL, cloud proxy | application pool, PgBouncer, cloud proxy | application pool, DRCP 등 |
 | transaction 주의 | autocommit, InnoDB lock/purge | aborted transaction 상태, long transaction·VACUUM | session state, cursor와 undo 관리 |

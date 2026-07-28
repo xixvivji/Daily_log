@@ -316,7 +316,7 @@ CodeDeploy에서 Blue/Green은 두 환경을 운용하는 큰 배포 model이고
 ## Native ECS와 CodeDeploy 비교
 
 | 구분 | ECS Native | CodeDeploy 기반 |
-|---|---|---|
+| --- | --- | --- |
 | Controller | `ECS` | `CODE_DEPLOY` |
 | 시작 | ECS Service revision update | CodeDeploy deployment 생성 |
 | 설정 중심 | ECS deployment configuration | Deployment Group + AppSpec |
@@ -538,4 +538,3 @@ ECS Native Canary와 CodeDeploy 기반 ECS Blue/Green의 Canary configuration이
 - [Amazon ECS Blue/Green Deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-blue-green.html)
 - [CodeDeploy Blue/Green Deployments for Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html)
 - [ALB Weighted Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/rule-action-types.html)
-

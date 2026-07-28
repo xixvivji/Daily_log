@@ -437,4 +437,3 @@ Package
 ```
 
 Routine과 Trigger는 migration 자동 변환 실패가 많은 영역이므로 별도 inventory와 integration test가 필요하다.
-

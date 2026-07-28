@@ -239,4 +239,3 @@ Consensus만 있음
 둘을 결합
 → node별 crash recovery + cluster 차원의 합의
 ```
-

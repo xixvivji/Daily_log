@@ -152,4 +152,3 @@ connection 사용률 + pool wait
 5. escalation 담당자
 6. 복구 확인 기준
 7. 사후 분석에 남길 자료
-

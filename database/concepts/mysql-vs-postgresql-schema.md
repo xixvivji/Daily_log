@@ -65,4 +65,3 @@ PostgreSQL Server
 MySQL:      Server → Database(Schema) → Table
 PostgreSQL: Server → Database → Schema → Table
 ```
-

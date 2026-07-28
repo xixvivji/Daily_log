@@ -85,8 +85,8 @@ MySQL과 PostgreSQL은 database 그 자체의 일반 명칭이 아니라 DBMS �
 
 | id | name | email |
 | ---: | --- | --- |
-| 1 | 김개발 | kim@example.com |
-| 2 | 이데이터 | lee@example.com |
+| 1 | 김개발 | <kim@example.com> |
+| 2 | 이데이터 | <lee@example.com> |
 
 ### 주문 Table
 
@@ -497,4 +497,3 @@ Oracle에서는 DBMS_XPLAN 등의 방식으로 확인한다.
 1. [PPT 1~33장 순차 학습 가이드](00-ppt-sequential-study-guide.md)
 2. [MySQL·PostgreSQL·Oracle 비교 가이드](08-cross-dbms-comparison-guide.md)
 3. [강의 전체 지도와 용어](01-database-course-map-and-glossary.md)
-

@@ -241,7 +241,7 @@ table/clustered record 변경
 ## 16. DBMS별 빠른 비교
 
 | 주제 | MySQL InnoDB | PostgreSQL | Oracle |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 기본 row 조직 | clustered PK 중심 | heap + 별도 index | heap + ROWID가 일반적 |
 | 과거 version | undo + purge | heap tuple + VACUUM | undo segment |
 | 물리 위치 변화 | PK 구조와 secondary lookup 고려 | tuple version·HOT·heap fetch | row migration/chaining 등 고려 |
