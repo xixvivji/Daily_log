@@ -309,6 +309,100 @@ payment module
 
 module 사이 결합이 낮고 독립 배포 필요성이 실제로 생겼을 때 일부를 service로 분리하기가 쉬워진다.
 
+## Microservice Architecture
+
+Microservice Architecture는 업무 capability를 기준으로 application과 data ownership을 독립적인 service로 나누는 방식이다. 단순히 Controller package를 별도 process로 분리한다고 microservice가 되는 것은 아니다.
+
+```text
+독립 배포
+→ 한 service 변경을 다른 service와 함께 배포하지 않아도 됨
+
+독립 확장
+→ traffic과 resource 요구가 큰 service만 확장 가능
+
+장애 격리
+→ 한 service 실패가 전체 process를 바로 종료시키지 않음
+
+팀 자율성
+→ service의 code, release와 운영 책임을 한 팀이 소유
+```
+
+대신 process 내부 호출이 network 호출로 바뀌고 하나의 local transaction으로 처리하던 작업이 분산된다.
+
+```text
+부분 실패와 timeout
+data 중복과 최종 일관성
+분산 transaction과 보상 처리
+API와 event schema 호환성
+service별 배포, monitoring과 비용 증가
+log와 trace를 연결해야 하는 운영 복잡성
+```
+
+### Service 경계와 Data Ownership
+
+서비스 경계는 table 수나 기술 계층이 아니라 업무 책임과 변경 이유를 기준으로 정한다. 주문 service와 결제 service가 독립적이라면 한 service가 다른 service의 table을 직접 수정하지 않고 공개 API나 event로 협력한다.
+
+```text
+나쁜 경계
+→ 모든 service가 하나의 DB schema와 table을 직접 공유
+→ 독립 배포처럼 보이지만 실제 변경과 장애가 강하게 결합
+
+명확한 경계
+→ 각 service가 자기 data의 쓰기 권한을 소유
+→ 다른 service는 API, event 또는 복제된 read model 사용
+```
+
+Database per Service는 반드시 DB server를 물리적으로 하나씩 둔다는 뜻이 아니라 data ownership과 접근 경계를 분리한다는 의미다.
+
+### 공통 구성 요소
+
+```text
+API Gateway
+→ 외부 요청의 단일 진입점, routing, 인증, rate limit 같은 edge 정책
+
+Service Discovery
+→ 동적으로 변하는 service instance 위치 탐색
+
+Centralized Configuration
+→ 환경별 설정을 일관되게 배포하고 변경 이력 관리
+
+Resilience
+→ timeout, retry, circuit breaker, bulkhead로 부분 실패 격리
+
+Observability
+→ metric, 중앙 log, distributed trace로 여러 service를 통과한 요청 추적
+```
+
+Eureka, Spring Cloud Gateway, Config Server, OpenFeign은 구현 선택지다. Kubernetes 환경에서는 Service와 DNS가 service discovery를 제공하고 ConfigMap, Secret 또는 외부 설정 시스템을 사용할 수 있다. architecture 개념과 특정 제품을 같은 것으로 외우지 않는다.
+
+### Service 간 통신과 Data 일관성
+
+즉시 결과가 필요하면 동기 HTTP/gRPC를 사용할 수 있고, 느슨한 결합과 traffic 완충이 중요하면 message와 event를 사용할 수 있다. 어느 방식이든 timeout, 중복, 순서와 schema version을 설계해야 한다.
+
+여러 service의 DB를 하나의 ACID transaction으로 쉽게 묶을 수 없으므로 다음을 조합한다.
+
+```text
+Saga와 보상 action
+Transactional Outbox
+Consumer idempotency
+상태 machine
+Retry와 reconciliation
+```
+
+최종 일관성을 선택했다면 사용자가 중간 상태를 어떻게 보게 되는지, 실패한 흐름을 누가 어떻게 복구하는지까지 업무 계약으로 정의한다.
+
+### MSA를 선택할 기준
+
+```text
+서로 다른 업무 영역이 독립적인 속도로 변경되는가?
+팀이 service를 개발부터 운영까지 독립적으로 소유할 수 있는가?
+부분 확장과 장애 격리의 이익이 실제로 큰가?
+분산 시스템의 배포와 관측 기반이 준비됐는가?
+data 일관성 복잡성을 감당할 이유가 있는가?
+```
+
+초기 서비스나 작은 팀은 잘 나눈 Modular Monolith가 더 안전할 수 있다. 한 process 안에서 module 경계와 data ownership을 먼저 검증한 뒤 독립 배포 필요성이 생긴 부분을 분리하면 되돌리기 어려운 분산 복잡성을 줄일 수 있다.
+
 ## 구조 선택 기준
 
 ```text
@@ -349,4 +443,5 @@ DTO 변환 계층이 너무 많아 한 field 추가에 많은 파일 수정
 Layered Architecture는 Controller, Service, Repository로 책임을 나누는 가장 기본적인 백엔드 구조다.
 DDD는 도메인 규칙을 중심으로 모델을 설계하는 접근이고, Clean Architecture는 비즈니스 규칙이 프레임워크와 DB에 강하게 묶이지 않게 하는 구조를 지향한다.
 작은 프로젝트에서는 단순한 layered 구조로 시작하고, 복잡도가 커질수록 도메인 중심 설계를 강화하는 것이 현실적이다.
+Microservice는 독립 배포와 data ownership을 얻는 대신 network 부분 실패와 최종 일관성, 운영 복잡성을 감수하는 선택이다.
 ```

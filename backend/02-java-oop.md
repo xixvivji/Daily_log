@@ -43,6 +43,76 @@ new Member()
 → 실제 회원 객체
 ```
 
+## 필드, 메서드, 생성자
+
+클래스는 상태를 저장하는 필드, 행동을 정의하는 메서드, 객체의 초기 상태를 만드는 생성자로 구성된다.
+
+```java
+public class Member {
+    private final String email;
+    private String nickname;
+
+    public Member(String email, String nickname) {
+        this.email = email;
+        this.nickname = nickname;
+    }
+
+    public void changeNickname(String nickname) {
+        this.nickname = nickname;
+    }
+}
+```
+
+```text
+필드
+→ 객체가 유지하는 상태
+
+메서드
+→ 객체가 외부에 제공하는 행동
+
+생성자
+→ 유효한 초기 상태로 객체를 생성하는 경계
+```
+
+생성자를 하나도 선언하지 않으면 compiler가 기본 생성자를 만들어준다. 생성자를 하나라도 직접 선언하면 기본 생성자는 자동 생성되지 않는다. `this`는 현재 객체를 가리키며, `super`는 부모 부분의 생성자나 멤버에 접근할 때 사용한다.
+
+`static` 멤버는 개별 객체가 아니라 class에 속해 모든 instance가 공유한다. 공유되는 mutable static 상태는 여러 요청이 동시에 접근하는 백엔드에서 race condition과 test 간 간섭을 만들 수 있다.
+
+`final`은 대상에 따라 의미가 다르다.
+
+```text
+final 변수
+→ 한 번 대입한 참조나 값을 다시 대입할 수 없음
+
+final 메서드
+→ 자식 class가 overriding할 수 없음
+
+final class
+→ 상속할 수 없음
+```
+
+`final` 참조가 가리키는 객체 내부까지 자동으로 불변이 되는 것은 아니다.
+
+## 접근 제어자
+
+접근 제어자는 객체가 외부에 공개할 범위를 정한다.
+
+```text
+public
+→ 모든 package에서 접근 가능
+
+protected
+→ 같은 package 또는 상속 관계에서 접근 가능
+
+package-private
+→ 접근 제어자를 쓰지 않은 경우이며 같은 package에서만 접근 가능
+
+private
+→ 선언한 class 내부에서만 접근 가능
+```
+
+무조건 `public`으로 열기보다 필요한 최소 범위만 공개한다. package를 단순한 directory가 아니라 접근 경계로 활용하면 module 내부 구현이 외부에 새어 나가는 것을 줄일 수 있다.
+
 ## 캡슐화
 
 캡슐화는 객체의 내부 상태를 외부에서 마음대로 바꾸지 못하게 하고, 정해진 메서드를 통해서만 변경하게 하는 것이다.
@@ -88,6 +158,17 @@ is-a 관계가 아닌데 상속을 쓰기 쉬움
 
 상속은 진짜 `is-a` 관계일 때 조심해서 사용한다.
 
+자식 생성자는 객체의 부모 부분을 먼저 초기화해야 한다. 명시하지 않으면 compiler가 부모의 기본 생성자를 호출하는 `super()`를 넣지만, 부모에게 기본 생성자가 없다면 호출할 생성자를 직접 지정해야 한다.
+
+```java
+public PremiumMember(String email, String nickname, int grade) {
+    super(email, nickname);
+    this.grade = grade;
+}
+```
+
+상속은 부모의 public/protected 동작과 계약을 물려받는 것이지, 부모의 private 필드에 직접 접근할 권한을 얻는 것은 아니다.
+
 ## 다형성
 
 다형성은 같은 인터페이스를 통해 서로 다른 구현체를 사용할 수 있는 성질이다.
@@ -128,6 +209,36 @@ public class OrderService {
 
 이 구조는 Spring DI와도 바로 연결된다.
 
+### Overloading과 Overriding
+
+```text
+Overloading
+→ 같은 이름의 method를 parameter 목록을 다르게 선언
+→ compile 시점에 호출 대상 결정
+
+Overriding
+→ 자식 class가 부모나 interface의 method를 같은 signature로 재정의
+→ 실제 객체 type에 따라 runtime에 실행 method 결정
+```
+
+반환형만 바꾸는 것은 overloading이 아니다. overriding할 때는 `@Override`를 붙여 signature 실수를 compiler가 확인하게 한다.
+
+### Upcasting과 Downcasting
+
+자식 객체를 부모나 interface type으로 참조하는 upcasting은 안전하며 다형성의 기본이다.
+
+```java
+DiscountPolicy policy = new RateDiscountPolicy();
+```
+
+부모 type 참조를 자식 type으로 바꾸는 downcasting은 실제 객체 type이 맞지 않으면 `ClassCastException`이 발생한다. 자식 구현에만 있는 method를 호출하려고 반복적으로 downcasting한다면 추상화가 부족한지 먼저 확인한다.
+
+```java
+if (policy instanceof RateDiscountPolicy ratePolicy) {
+    ratePolicy.changeRate(10);
+}
+```
+
 ## 추상화
 
 추상화는 복잡한 구현 세부사항을 숨기고 중요한 역할만 드러내는 것이다.
@@ -146,6 +257,22 @@ public interface PaymentClient {
 PaymentClient라는 역할에만 의존
 구현체는 설정으로 교체 가능
 ```
+
+### 추상 클래스와 인터페이스
+
+```text
+추상 class
+→ 공통 상태와 구현을 공유하는 밀접한 class 계층
+→ constructor와 instance field를 가질 수 있음
+→ class는 하나의 class만 상속 가능
+
+interface
+→ 서로 다른 객체가 지켜야 할 역할과 계약
+→ class는 여러 interface를 구현 가능
+→ default method를 가질 수 있지만 상태 공유가 주목적은 아님
+```
+
+단순히 method 구현을 재사용하려고 상속하기보다 역할은 interface로 표현하고 구현 재사용은 조합으로 해결할 수 있는지 먼저 본다.
 
 ## SOLID 간단 정리
 
@@ -265,4 +392,5 @@ DTO와 Entity를 같은 객체로 사용
 객체지향은 비즈니스 개념을 객체로 나누고 각 객체가 자기 책임을 가지도록 만드는 방식이다.
 캡슐화는 객체 상태를 외부에서 마음대로 바꾸지 못하게 하고, 객체의 메서드를 통해 규칙 있게 변경하게 하는 것이다.
 다형성과 추상화는 구현체 교체와 테스트를 쉽게 만들고, Spring DI와 직접 연결된다.
+접근 범위는 최소로 열고 상속은 타입 계약이 성립할 때 사용하며, 단순 구현 재사용에는 조합을 먼저 고려한다.
 ```

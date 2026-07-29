@@ -283,7 +283,74 @@ Spring AOP는 주로 대상 Bean을 감싼 proxy를 컨테이너에 등록한다
 → commit 또는 rollback
 ```
 
+### AOP 핵심 용어
+
+```text
+Aspect
+→ 여러 class에 적용할 공통 관심사를 모은 module
+
+Join Point
+→ advice를 적용할 수 있는 실행 지점
+→ Spring AOP에서는 주로 Bean의 method 실행
+
+Pointcut
+→ 어떤 Join Point를 대상으로 할지 선택하는 조건
+
+Advice
+→ 선택한 지점에서 실제 실행할 부가 로직
+
+Target
+→ 부가 로직이 적용되는 원본 객체
+
+Proxy
+→ Target 호출을 가로채 Advice를 실행하는 대리 객체
+```
+
+Advice는 실행 시점에 따라 나뉜다.
+
+```text
+@Before
+→ method 실행 전
+
+@AfterReturning
+→ 정상 반환 후
+
+@AfterThrowing
+→ 예외 발생 후
+
+@After
+→ 정상/예외와 관계없이 종료 후
+
+@Around
+→ 호출 전후 전체 흐름을 감싸며 실행 여부와 반환값까지 제어
+```
+
+`@Around`는 강력하지만 `proceed()` 호출을 빠뜨리거나 예외를 삼키면 원래 method의 의미를 바꿀 수 있다.
+
+### Pointcut 표현식
+
+대표적인 `execution` 표현식은 반환형, package와 class, method, parameter 조건을 순서대로 읽는다.
+
+```text
+execution(* com.example.order..*Service.*(..))
+          | |                           |
+          | |                           └ 모든 parameter
+          | └ order 이하 package의 Service method
+          └ 모든 반환형
+```
+
+대상을 너무 넓게 잡으면 의도하지 않은 Bean에 적용되고 logging 양이나 실행 비용이 커질 수 있다. package 규칙이나 전용 annotation처럼 의도가 드러나는 기준을 사용한다.
+
 interface가 있으면 JDK dynamic proxy를 사용할 수 있고, class 기반 proxy에는 CGLIB 방식이 사용된다. 구현 방식보다 중요한 점은 호출이 Spring이 만든 proxy를 지나야 advice가 실행된다는 것이다.
+
+```text
+JDK Dynamic Proxy
+→ interface를 기준으로 proxy 생성
+
+class 기반 proxy
+→ 대상 class를 상속한 proxy 생성
+→ final class와 final/private method처럼 overriding할 수 없는 지점에는 제약이 있음
+```
 
 ```java
 public void outer() {
@@ -295,6 +362,8 @@ public void inner() { }
 ```
 
 method를 별도 Bean으로 분리하거나 transaction 경계를 외부에서 호출되는 public method에 두어 해결한다. `@Transactional`, `@Async`, `@Cacheable`처럼 proxy에 의존하는 기능을 사용할 때 공통으로 확인해야 한다.
+
+AOP에는 logging, transaction, metric처럼 기술적인 횡단 관심사를 둔다. 주문 가능 여부나 할인 계산 같은 핵심 비즈니스 규칙을 pointcut으로 숨기면 실제 실행 흐름을 찾기 어려워지므로 Domain이나 Service의 명시적인 호출로 표현한다.
 
 ## 조건부 Bean 등록
 
@@ -315,4 +384,5 @@ classpath에 특정 class가 있는가?
 Spring Core의 핵심은 객체 생성과 의존관계 관리를 Spring Container가 담당하게 하는 것이다.
 IoC는 객체 제어권이 개발자 코드에서 Spring으로 넘어간 것이고, DI는 필요한 의존 객체를 외부에서 주입받는 방식이다.
 Bean은 Spring Container가 생성하고 관리하는 객체이며, 기본적으로 singleton으로 관리되기 때문에 상태를 함부로 가지면 안 된다.
+Spring AOP는 pointcut으로 선택한 Bean method 호출을 proxy가 가로채 transaction, logging 같은 advice를 적용한다.
 ```

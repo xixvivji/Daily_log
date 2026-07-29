@@ -107,6 +107,43 @@ JSON request
 → JSON response
 ```
 
+## 요청 값 Binding
+
+HTTP 요청의 어느 부분을 읽는지에 따라 사용하는 annotation이 다르다.
+
+| Annotation | 읽는 위치 | 대표 용도 |
+| --- | --- | --- |
+| `@PathVariable` | URI path | 특정 resource 식별자 |
+| `@RequestParam` | Query string, form field | 검색, filter, pagination |
+| `@RequestBody` | HTTP body | JSON 요청 DTO |
+| `@ModelAttribute` | Query string, form field | 여러 form 값을 객체로 binding |
+| `@RequestHeader` | HTTP header | 조건부 요청, client metadata |
+| `@CookieValue` | Cookie header | 특정 cookie 값 조회 |
+
+```text
+GET /api/members/10?includeOrders=true
+
+10
+→ @PathVariable
+
+includeOrders=true
+→ @RequestParam
+```
+
+문자열을 숫자나 날짜로 변환하지 못한 binding 오류와 JSON 문법·구조를 읽지 못한 message conversion 오류는 validation 오류 이전에 발생할 수 있다. 모든 잘못된 입력을 하나의 exception만으로 처리한다고 가정하지 않는다.
+
+### Content-Type과 Accept
+
+```text
+Content-Type
+→ request나 response body가 실제로 어떤 media type인지 설명
+
+Accept
+→ client가 응답으로 받을 수 있는 media type을 표현
+```
+
+Spring MVC는 mapping 조건과 header를 보고 적절한 `HttpMessageConverter`를 선택한다. 지원하지 않는 request media type은 `415 Unsupported Media Type`, 제공할 수 없는 response type은 `406 Not Acceptable`이 될 수 있다.
+
 ## DTO
 
 DTO는 Data Transfer Object다.
@@ -144,6 +181,38 @@ public MemberResponse create(@Valid @RequestBody MemberCreateRequest request) {
 ```
 
 검증은 Controller 경계에서 1차로 처리하고, 비즈니스 규칙은 Service나 Domain에서 처리한다.
+
+### @Valid와 @Validated
+
+```text
+@Valid
+→ Jakarta Bean Validation 표준
+→ 객체와 중첩 객체의 기본 constraint 검증
+
+@Validated
+→ Spring이 제공하는 확장
+→ validation group 지정과 method validation에 활용
+```
+
+중첩 DTO는 해당 field에도 `@Valid`를 붙여야 내부 constraint가 연쇄적으로 검증된다.
+
+Validation group으로 생성과 수정 규칙을 나눌 수 있지만 group이 많아지면 한 DTO가 여러 use case의 조건을 동시에 떠안는다. 입력 계약이 실제로 다르면 `MemberCreateRequest`, `MemberUpdateRequest`처럼 DTO를 분리하는 편이 명확할 수 있다.
+
+검증 책임도 구분한다.
+
+```text
+입력 형식 검증
+→ null, 길이, 숫자 범위, email 형식
+→ HTTP adapter 경계
+
+비즈니스 규칙 검증
+→ 이미 탈퇴한 회원인지, 주문을 취소할 수 있는 상태인지
+→ Service 또는 Domain
+
+DB 무결성
+→ unique, foreign key, check constraint
+→ 동시 요청까지 막는 최종 방어선
+```
 
 ## Error Response
 
@@ -193,6 +262,46 @@ POST /api/createMember
 ```text
 POST /api/members
 ```
+
+### REST 제약 조건
+
+REST는 URL 작성 규칙만이 아니라 분산 시스템을 위한 architecture style이다.
+
+```text
+Client-Server
+→ client 관심사와 server 관심사를 분리
+
+Stateless
+→ 각 요청이 처리에 필요한 문맥을 포함
+→ server가 DB resource를 저장하지 않는다는 뜻은 아님
+
+Cacheable
+→ response가 cache 가능한지 명시
+
+Uniform Interface
+→ resource 식별, representation을 통한 조작, self-descriptive message 등 일관된 interface 사용
+
+Layered System
+→ client가 gateway, proxy, origin 중 누구와 통신하는지 몰라도 계층적으로 동작
+
+Code on Demand
+→ 선택적 제약으로 server가 실행 가능한 code를 client에 전달 가능
+```
+
+Resource는 서버가 관리하는 개념이고 representation은 그 resource의 특정 시점 표현이다. 같은 회원 resource도 JSON, CSV 등 서로 다른 representation으로 전달할 수 있다.
+
+```text
+Resource
+→ 회원 10번이라는 대상
+
+URI
+→ /api/members/10이라는 식별자
+
+Representation
+→ {"id":10,"nickname":"jiwon"}이라는 표현
+```
+
+URL은 위치와 접근 방법을 나타내는 URI의 한 종류다. API 설계에서는 용어 구분 자체보다 안정적인 resource 식별자와 HTTP 의미론을 유지하는 것이 더 중요하다.
 
 ## Spring MVC 내부 구성 요소
 
@@ -342,4 +451,5 @@ Spring MVC는 HTTP 요청을 Controller 메서드에 연결하고, JSON과 Java 
 Controller는 HTTP 요청/응답을 담당하고, 비즈니스 로직은 Service로 위임하는 것이 좋다.
 REST API는 resource 중심으로 URL을 설계하고, method로 행위를 표현한다.
 검증과 예외 응답은 공통 구조로 관리해야 API 품질이 좋아진다.
+요청 값은 path, query, header, cookie와 body 중 어디에서 오는지에 맞춰 binding하고 HTTP media type을 함께 확인한다.
 ```

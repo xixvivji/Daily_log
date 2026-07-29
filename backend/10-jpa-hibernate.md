@@ -210,6 +210,81 @@ UUID
 
 전략은 insert 시점, batch insert 가능 여부, index 크기와 분산 환경에 영향을 준다. 식별자는 단순 타입 선택이 아니라 DB와 쓰기 패턴을 함께 보고 결정한다.
 
+## 기본 Field Mapping
+
+Entity field는 기본 규칙으로도 column에 매핑되지만, schema 의도를 명확히 해야 할 때 annotation을 사용한다.
+
+```text
+@Table
+→ table 이름, schema, unique constraint 등 지정
+
+@Column
+→ column 이름, null 허용, 길이, precision과 scale 등 지정
+
+@Enumerated(EnumType.STRING)
+→ enum 이름을 문자열로 저장
+
+@Lob
+→ 큰 text 또는 binary 값 매핑
+
+@Transient
+→ persistence 대상에서 제외
+```
+
+`@Column(nullable = false, unique = true)` 같은 mapping 정보가 application 개발에는 도움을 주지만 production schema 변경을 annotation과 `ddl-auto`에만 맡기지 않는다. 실제 constraint와 index는 migration 도구로 명시하고 검증한다.
+
+Enum은 순서를 저장하는 `ORDINAL`보다 이름을 저장하는 `STRING`이 일반적으로 안전하다. 중간에 enum 상수를 삽입하거나 순서를 바꾸면 `ORDINAL`로 저장된 기존 데이터의 의미가 달라질 수 있다. 이름 자체도 영구적인 DB 계약이므로 rename이 필요하면 migration을 함께 수행한다.
+
+금액은 부동소수점 오차가 있는 `double`보다 `BigDecimal`과 적절한 precision/scale을 사용한다. `@Lob`은 큰 값을 한 Entity와 함께 무조건 조회하게 만들 수 있으므로 access pattern과 storage 비용을 고려한다.
+
+## Value Type과 Embedded Mapping
+
+식별자 없이 값 자체로 의미가 결정되는 객체는 embeddable value type으로 표현할 수 있다.
+
+```java
+@Embeddable
+public class Address {
+    private String city;
+    private String street;
+    private String zipCode;
+}
+```
+
+```java
+@Embedded
+private Address shippingAddress;
+```
+
+별도 table이 만들어지는 것이 아니라 소유 Entity의 column으로 펼쳐진다. 같은 value type을 한 Entity에서 여러 번 사용해 column 이름이 충돌하면 `@AttributeOverride`로 column mapping을 구분한다.
+
+Value type은 식별자와 독립 생명주기가 없으므로 immutable하게 설계하면 공유 참조로 인한 의도하지 않은 변경을 줄일 수 있다.
+
+## 복합 Key
+
+두 개 이상의 column으로 식별자를 구성해야 하면 `@EmbeddedId` 또는 `@IdClass`를 사용할 수 있다.
+
+```text
+@EmbeddedId
+→ 복합 key를 하나의 value object로 포함
+
+@IdClass
+→ Entity field는 그대로 두고 별도 key class로 식별자 구조 선언
+```
+
+복합 key class는 직렬화 가능해야 하고 논리적 동등성을 표현하는 `equals()`와 `hashCode()`가 필요하다. 관계 table의 자연스러운 복합 key가 아니라면 surrogate key와 DB unique constraint가 더 단순한지 비교한다.
+
+## Attribute Converter
+
+`AttributeConverter`는 domain type과 DB column type 사이 변환을 중앙화한다.
+
+```text
+Money object ↔ numeric column
+암호화된 값 ↔ String column
+legacy code ↔ enum
+```
+
+Converter는 단일 column 변환에 적합하다. query 조건, index, DB 함수와의 호환성에 영향을 줄 수 있으며, converter 안에서 외부 API나 DB를 호출하면 안 된다.
+
 ## 연관관계 Mapping
 
 ```java
@@ -336,10 +411,15 @@ collection은 null 대신 빈 collection으로 초기화
 toString, equals, hashCode에 lazy relation을 무심코 포함하지 않음
 ```
 
+Lombok의 `@Data`는 모든 field 기반 `equals()`, `hashCode()`, `toString()`과 setter를 한꺼번에 만들기 때문에 Entity에 무심코 사용하지 않는다. lazy relation 접근, 순환 호출, proxy type, 식별자 생성 전후의 동등성 변화가 문제가 될 수 있다.
+
+Entity 동등성은 생명주기와 식별자 전략을 함께 고려한다. DB 생성 ID만 비교하면 저장 전의 서로 다른 새 Entity가 모두 `id == null`인 문제가 있고, mutable field 전체를 비교하면 값 변경 뒤 `HashSet`에서 Entity를 찾지 못할 수 있다. 업무상 안정적인 natural key가 있는지, persistence 전후에 어떤 동등성을 원하는지 먼저 정한다.
+
 ## 설명할 때 핵심 문장
 
 ```text
 JPA는 Java 객체와 RDB 테이블을 매핑하는 ORM 표준이고, Hibernate는 대표적인 구현체다.
 영속성 컨텍스트는 Entity를 관리하며 1차 캐시, 변경 감지, 쓰기 지연 같은 기능을 제공한다.
 JPA는 편하지만 N+1, 지연 로딩, flush, transaction 경계를 이해하지 못하면 성능과 장애 문제가 생길 수 있다.
+Field와 value type mapping은 Java 객체 표현뿐 아니라 실제 schema constraint, migration과 query 비용까지 함께 설계해야 한다.
 ```
