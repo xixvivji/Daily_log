@@ -92,9 +92,4 @@
 - [02. Canary와 Progressive Delivery 실전](devops/02-canary-progressive-delivery.md)
 - [03. 배포 전략 비교: Recreate, Rolling, Blue/Green, Canary](devops/03-deployment-strategies.md)
 - [04. Amazon ECS와 ALB 배포 실전](devops/04-ecs-alb-deployment.md)
-
-### Data Analysis & AIOps
-
-- [01. 데이터 분석 개요 및 기초통계 - Day 1](data-aiops/01-data-analysis-and-basic-statistics-day1.md)
-- [02. 상관분석과 회귀분석 - Day 2](data-aiops/02-correlation-and-regression-day2.md)
 <!-- NOTE_INDEX_END -->
