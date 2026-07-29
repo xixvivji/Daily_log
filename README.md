@@ -65,6 +65,7 @@
 - [26. OAuth 2.0과 OpenID Connect 로그인 실전](backend/26-oauth2-oidc-login.md)
 - [27. 파일 업로드와 Amazon S3 설계](backend/27-file-upload-s3.md)
 - [28. OpenAPI와 API 문서화](backend/28-openapi-api-documentation.md)
+- [29. Java와 Spring 디자인 패턴](backend/29-java-spring-design-patterns.md)
 
 ### Database
 

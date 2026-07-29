@@ -33,4 +33,5 @@
 26. OAuth 2.0과 OpenID Connect 로그인 실전
 27. 파일 업로드와 Amazon S3 설계
 28. OpenAPI와 API 문서화
+29. Java와 Spring 디자인 패턴
 ```

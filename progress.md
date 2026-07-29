@@ -641,5 +641,5 @@ Terraform 기초
 
 ```text
 네트워크 큰그림, IP/CIDR, 라우팅, NAT, DNS, TCP, UDP, HTTP, TLS, 방화벽, 프록시, Nginx, Docker 네트워크, AWS 네트워크, 장애 분석까지 상세 노트가 작성되어 있다.
-네트워크는 중복 종합본을 정리했고, 백엔드는 역할·관리자 권한, OAuth 로그인, 파일·S3, OpenAPI까지 보강했다.
+네트워크는 중복 종합본을 정리했고, 백엔드는 역할·관리자 권한, OAuth 로그인, 파일·S3, OpenAPI와 디자인 패턴까지 보강했다.
 ```
